@@ -8,14 +8,15 @@ public class OctagonalPrism extends Shape
         super(height);
         this.side = side;
     }
-
-    @Override
-    public double calcVolume() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
+    
     @Override
     public double calcBaseArea() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return 2 * (1 + Math.sqrt(2)) * side * side;
     }
+    
+    @Override
+    public double calcVolume() {
+        return calcBaseArea() * getHeight();
+    }
+
 }

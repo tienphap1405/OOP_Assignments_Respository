@@ -8,14 +8,15 @@ public class TriangularPrism extends Shape
         this.side = side;
     }
 
-    @Override
-    public double calcVolume() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     @Override
     public double calcBaseArea() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        double area = (side * side * Math.sqrt(3)) / 4;
+        return area;
     }
-
+     
+    @Override
+    public double calcVolume() {
+        return calcBaseArea() * getHeight();
+    }
 }

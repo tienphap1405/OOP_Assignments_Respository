@@ -11,12 +11,12 @@ public class SquarePrism extends Shape
 
     @Override
     public double calcVolume() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return side * side * getHeight();
     }
 
     @Override
     public double calcBaseArea() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return side * side;
     }
     
 }

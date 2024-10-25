@@ -10,13 +10,14 @@ public class PentagonalPrism extends Shape
     }
 
     @Override
-    public double calcVolume() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public double calcBaseArea() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        double area = (5 * side * side * Math.tan((3 * Math.PI) /10)) / 4;
+        return area;
+    }
+    
+    @Override
+    public double calcVolume() {
+        return calcBaseArea() * getHeight();
     }
     
 }

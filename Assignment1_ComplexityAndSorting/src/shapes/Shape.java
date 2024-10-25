@@ -9,7 +9,7 @@ package shapes;
  *
  * @author tienp
  */
-public abstract class Shape {
+public abstract class Shape implements Comparable<Shape>{
     private double height;
     
     public Shape(double height){
@@ -27,4 +27,18 @@ public abstract class Shape {
     public abstract double calcVolume();
     
     public abstract double calcBaseArea();
+
+    @Override
+    public int compareTo(Shape otherShape) {
+        double compareHeight = this.height - otherShape.height;
+        if(compareHeight > 0){
+            return 1;
+        }
+        else if (compareHeight < 0){
+            return -1;
+        }
+        else{
+            return 0;
+        }
+    }
 }

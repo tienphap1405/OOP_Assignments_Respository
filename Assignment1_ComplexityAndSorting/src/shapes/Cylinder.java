@@ -14,12 +14,12 @@ public class Cylinder extends Shape
 
     @Override
     public double calcVolume() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return Math.PI * radius * radius * getHeight();
     }
 
     @Override
     public double calcBaseArea() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return Math.PI * radius * radius;
     }
 
 }
