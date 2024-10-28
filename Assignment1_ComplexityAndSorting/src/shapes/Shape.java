@@ -32,10 +32,10 @@ public abstract class Shape implements Comparable<Shape>{
     public int compareTo(Shape otherShape) {
         double compareHeight = this.height - otherShape.height;
         if(compareHeight > 0){
-            return 1;
+            return -1;
         }
         else if (compareHeight < 0){
-            return -1;
+            return 1;
         }
         else{
             return 0;

@@ -22,8 +22,10 @@ public class AppDriver
             testing[0] = "-Fshapes1.txt";
             // -t(Comparitve Property)
             testing[1] = "-Th";
+
             // -s(Sorting Method)
             testing[2] = "-Sb";
+
             
             if (testing.length != 3) {
                 System.err.println("Invalid Input - requires 3 arguments");
