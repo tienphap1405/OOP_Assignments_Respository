@@ -5,11 +5,19 @@ import java.util.Comparator;
 import shapes.AreaComparator;
 import shapes.VolumeComparator;
 
-
+/**
+ *
+ * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
+ */
 public class Sorting {
     
-    
-    
+    /**
+     *
+     * @param s1
+     * @param s2
+     * @param comparator
+     * @return
+     */
     public static int compare(Shape s1, Shape s2, Comparator<Shape> comparator){
         if(comparator != null){
             return comparator.compare(s1, s2);
@@ -19,6 +27,12 @@ public class Sorting {
         }
     }
     
+    /**
+     *
+     * @param arrayComparables
+     * @param i
+     * @param j
+     */
     public static void swap(Shape[] arrayComparables, int i, int j){
         Shape temp = arrayComparables[i];
         arrayComparables[i] = arrayComparables[j];
@@ -28,6 +42,15 @@ public class Sorting {
     
     // Example array [10 4 5 9 8 6 1 2 7 3 77] --> l = 0; m = 6; r = 10
     // after divided: leftarray = [10 4 5 9 8 6 1]  |  rightarray = [2 7 3 77] 
+
+    /**
+     *
+     * @param totalComparables
+     * @param l
+     * @param m
+     * @param r
+     * @param comparator
+     */
     
     public static void merging (Shape[] totalComparables, int l, int m, int r, Comparator<Shape> comparator){
         // Find the size of the 2 arrays that need to be merged
@@ -76,7 +99,11 @@ public class Sorting {
         
     }
     
-
+    /**
+     *
+     * @param arrayComparables
+     * @param comparator
+     */
     public static void selectionSort(Shape[] arrayComparables, Comparator<Shape> comparator){
         int size = arrayComparables.length; 
         for (int i = 0; i < size; i++){
@@ -96,6 +123,14 @@ public class Sorting {
 
     
     // Recursion to divide the array to one sorted value array then merging (Dividing and Conquering method)
+
+    /**
+     *
+     * @param arrayComparables
+     * @param l
+     * @param r
+     * @param comparator
+     */
     public static void mergeSort(Shape[] arrayComparables, int l, int r, Comparator<Shape> comparator){
         if(l < r){
             int m = l + (r - l) / 2;
@@ -115,6 +150,14 @@ public class Sorting {
     // as the right pointer move to the left and stop when the value is smaller than the pivot
     // When both pointer stop, the swap method will swap the 2 pointer value
     // When the pointers meet, swap the pivot to the leftpointer position.
+
+    /**
+     *
+     * @param arrayComparables
+     * @param lowIndex
+     * @param highIndex
+     * @param comparator
+     */
     public static void quickSort(Shape[] arrayComparables, int lowIndex, int highIndex, Comparator<Shape> comparator){
         if(lowIndex >= highIndex) {
             return;
@@ -137,7 +180,11 @@ public class Sorting {
         quickSort(arrayComparables, leftPointer + 1, highIndex, comparator);
     }
 
-    
+    /**
+     *
+     * @param arrayComparables
+     * @param comparator
+     */
     public static void bubbleSort(Shape[] arrayComparables, Comparator<Shape> comparator){
         int size = arrayComparables.length; 
         for (int i=0; i<size-1; i++) {
@@ -150,6 +197,11 @@ public class Sorting {
         
     } 
     
+    /**
+     *
+     * @param arraytComparables
+     * @param comparator
+     */
     public static void insertionSort(Shape[] arraytComparables, Comparator<Shape> comparator){
         for (int i = 1; i < arraytComparables.length; i++){
             int index = i;
@@ -165,6 +217,11 @@ public class Sorting {
         }
     }
     
+    /**
+     *
+     * @param arraytComparables
+     * @param comparator
+     */
     public static void cycleSort(Shape[] arraytComparables, Comparator<Shape> comparator){
         
         int size = arraytComparables.length;

@@ -1,20 +1,37 @@
 package shapes;
 
+/**
+ *
+ * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
+ */
 public class PentagonalPrism extends Shape
 {
     private double side;
 
+    /**
+     *
+     * @param height
+     * @param side
+     */
     public PentagonalPrism(double height, double side) {
         super(height);
         this.side = side;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public double calcBaseArea() {
         double area = (5 * side * side * Math.tan((3 * Math.PI) /10)) / 4;
         return area;
     }
     
+    /**
+     *
+     * @return
+     */
     @Override
     public double calcVolume() {
         return calcBaseArea() * height;

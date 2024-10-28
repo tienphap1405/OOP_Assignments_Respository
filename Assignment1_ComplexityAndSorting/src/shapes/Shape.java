@@ -7,27 +7,56 @@ package shapes;
 
 /**
  *
- * @author tienp
+ * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
  */
 public abstract class Shape implements Comparable<Shape>{
+
+    /**
+     *
+     */
     protected double height;
     
+    /**
+     *
+     * @param height
+     */
     public Shape(double height){
         this.height = height;
     }
 
+    /**
+     *
+     * @return
+     */
     public double getHeight() {
         return height;
     }
 
+    /**
+     *
+     * @param height
+     */
     public void setHeight(double height) {
         this.height = height;
     }
     
+    /**
+     *
+     * @return
+     */
     public abstract double calcVolume();
     
+    /**
+     *
+     * @return
+     */
     public abstract double calcBaseArea();
 
+    /**
+     *
+     * @param otherShape
+     * @return
+     */
     @Override
     public int compareTo(Shape otherShape) {
         double compareHeight = this.height - otherShape.height;

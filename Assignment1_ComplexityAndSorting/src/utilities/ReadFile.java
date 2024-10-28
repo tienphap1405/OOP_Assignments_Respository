@@ -5,8 +5,18 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import shapes.*;
 
+/**
+ *
+ * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
+ */
 public class ReadFile { 
     
+    /**
+     *
+     * @param filePath
+     * @return
+     * @throws FileNotFoundException
+     */
     public static Shape[] loadShapes(String filePath) throws FileNotFoundException {
        
         // Only works on userInputs -fshapes1.txt, -fshapes2.txt and -fshapes3.txt
