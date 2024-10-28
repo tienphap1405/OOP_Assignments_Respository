@@ -9,6 +9,7 @@ import shapes.VolumeComparator;
 import utilities.Sorting;
 
 
+
 public class AppDriver
 {
 	public static void main( String[] args )
@@ -17,9 +18,14 @@ public class AppDriver
             // Testing string args
             String[] testing = new String[3];
             
+            // -f(filepath)
             testing[0] = "-Fshapes1.txt";
+            // -t(Comparitve Property)
             testing[1] = "-Th";
-            testing[2] = "-Ss";
+
+            // -s(Sorting Method)
+            testing[2] = "-Sb";
+
             
             if (testing.length != 3) {
                 System.err.println("Invalid Input - requires 3 arguments");
@@ -28,7 +34,7 @@ public class AppDriver
             
             
             String filePath = "";
-            String comparisonProperty = "";
+            String comparisonType = "";
             String sortingMethod = "";
             
             for (String testing1 : testing) {
@@ -38,7 +44,7 @@ public class AppDriver
                 
                 switch (category.toLowerCase()) {
                     case "-f" -> filePath = input;
-                    case "-t" -> comparisonProperty = input.toLowerCase();
+                    case "-t" -> comparisonType = input.toLowerCase();
                     case "-s" -> sortingMethod = input.toLowerCase();
                     default -> {
                         System.err.println("Invalid Input: " + category);
@@ -50,7 +56,7 @@ public class AppDriver
             
             Comparator<Shape> comparator;
             
-            switch (comparisonProperty) {
+            switch (comparisonType) {
                 case "h" -> comparator = null;
                 case "a" -> comparator = new AreaComparator();
                 case "v" -> comparator = new VolumeComparator();
@@ -73,38 +79,37 @@ public class AppDriver
             
 
             // Creating a copy of the array before sorting
-            Shape[] unsortedShapesArray = shapesArray;
+            System.out.println("Pre-Sorting");
+            printArray(shapesArray, comparisonType);
             
             // Determine comparison property
-
+            long start = System.nanoTime();
+            
             switch (sortingMethod) {
-                case "i" -> Sorting.InsertionSort(shapesArray, comparator);
-                case "s" -> Sorting.SelectionSort(shapesArray, comparator);
-                case "b" -> Sorting.BubbleSort(shapesArray, comparator);
-                case "q" -> Sorting.QuickSort(shapesArray, 0, shapesArray.length - 1, comparator);
-                case "m" -> Sorting.MergeSort(shapesArray, 0, shapesArray.length - 1, comparator);
-                case "z" -> System.out.println("Missing sorting method");
+                case "i" -> Sorting.insertionSort(shapesArray, comparator);
+                case "s" -> Sorting.selectionSort(shapesArray, comparator);
+                case "b" -> Sorting.bubbleSort(shapesArray, comparator);
+                case "q" -> Sorting.quickSort(shapesArray, 0, shapesArray.length - 1, comparator);
+                case "m" -> Sorting.mergeSort(shapesArray, 0, shapesArray.length - 1, comparator);
+                case "z" -> Sorting.radixSort(shapesArray, comparator, comparisonType);
                 default -> {
                     System.err.println("Invalid sorting method, enter: i, s, b, q, m or z");
                     return;
                 }
-            }             
+            }
+            
             
             // Testing 
-            System.out.println("Pre-Sorting");
-            printArray(unsortedShapesArray, comparisonProperty);
             System.out.println("\n\n\nPost-Sorting");
-            printArray(shapesArray, comparisonProperty);
-           
-
-            // refer to demo01 Test.java for an example on how to parse command
-            // line arguments and benchmarking tests
-
-
-            // refer to demo02 KittySort.java on how to use a custom sorting
-            // algorithm on a list of comparables to sort using either the
-            // natural order (comparable) or other orders (comparators)
-
+            printArray(shapesArray, comparisonType);
+            
+            long stop = System.nanoTime();
+            System.out.println("Time" + (stop - start));
+            
+            System.out.println("\nHighest Value in Comparison");
+            int value = Sorting.maxValue(shapesArray, comparator);
+            System.out.println(value);
+            
 	}
         
         private static void printArray(Shape[] array, String property) {
