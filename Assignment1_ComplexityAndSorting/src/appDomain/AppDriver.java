@@ -24,7 +24,7 @@ public class AppDriver
             testing[1] = "-Th";
 
             // -s(Sorting Method)
-            testing[2] = "-Sb";
+            testing[2] = "-Si";
 
             
             if (testing.length != 3) {

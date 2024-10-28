@@ -172,7 +172,18 @@ public class Sorting {
     } 
     
     public static void insertionSort(Shape[] arraytComparables, Comparator<Shape> comparator){
-
+        for (int i = 1; i < arraytComparables.length; i++){
+            int index = i;
+            for (int j = i - 1; j>=0; j--){
+                if(compare(arraytComparables[index], arraytComparables[j], comparator) <= 0){
+                    swap(arraytComparables, index, j);
+                    index = j;
+                }
+                else{
+                    break;
+                }
+            }
+        }
     }
     
     public static void radixSort(Shape[] arraytComparables, Comparator<Shape> comparator, String comparisonType){
