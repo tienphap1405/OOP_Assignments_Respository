@@ -14,20 +14,8 @@ public class AppDriver
 {
 	public static void main( String[] args )
 	{
-            
-            // Testing string args
-            String[] testing = new String[3];
-            
-            // -f(filepath)
-            testing[0] = "-Fshapes1.txt";
-            // -t(Comparitve Property)
-            testing[1] = "-Ta";
-
-            // -s(Sorting Method)
-            testing[2] = "-Sz";
-
-            
-            if (testing.length != 3) {
+                        
+            if (args.length != 3) {
                 System.err.println("Invalid Input - requires 3 arguments");
                 return;
             }
@@ -37,10 +25,12 @@ public class AppDriver
             String comparisonType = "";
             String sortingMethod = "";
             
-            for (String testing1 : testing) {
-                String category = testing1.substring(0, 2);
-                String input = testing1.substring(2);
+            for (String arg : args) {
+                System.err.println(arg);
+                String category = arg.substring(0, 2);
+                String input = arg.substring(2);
                 // System.err.println(category == "-f");
+                System.err.println(category);
                 
                 switch (category.toLowerCase()) {
                     case "-f" -> filePath = input;
