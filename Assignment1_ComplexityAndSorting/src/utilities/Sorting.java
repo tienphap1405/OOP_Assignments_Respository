@@ -76,27 +76,6 @@ public class Sorting {
         
     }
     
-    
-    public static int maxValue(Shape[] shapes, Comparator<Shape> comparator) {
-        
-        int size = shapes.length;
-        int max = 0;
-        // int max = (int)shapes[0].calcBaseArea;
-        for (int i = 1; i < size; i++) {
-            if (compare(shapes[i-1], shapes[i], comparator) >= 0) {
-                if (comparator == null) {
-                    max = (int)shapes[i].getHeight();    
-                }
-                else if (comparator instanceof AreaComparator)
-                    max = (int)shapes[i].calcBaseArea();
-                else {
-                    max = (int)shapes[i].calcVolume();
-                }
-            }
-        }
-        return max;
-    }
-    
 
     public static void selectionSort(Shape[] arrayComparables, Comparator<Shape> comparator){
         int size = arrayComparables.length; 
@@ -175,32 +154,8 @@ public class Sorting {
 
     }
     
-    public static void radixSort(Shape[] arraytComparables, Comparator<Shape> comparator, String comparisonType){
+    public static void cycleSort(Shape[] arraytComparables, Comparator<Shape> comparator){
             
-            // Testing Radix Sort
-            Shape[] output = new Shape[arraytComparables.length];
-            int[] count = new int[10];
-            
-            // How many times each digit appears from 0-9 and storing it in count
-            for (int i = 0; i < arraytComparables.length; i++) {
-                int index = (int)((arraytComparables[i].getHeight() / 1) % 10);
-                count[index]++;
-            }   
-            
-            // Accumulating the number of counted objects
-            for (int i = 1; i < 10; i++) {
-                count[i] += count[i - 1];
-            }
-            
-            
-            // Last step to sort the first time
-            for (int i = (arraytComparables.length - 1); i >=0; i--) {
-                int index = (int)(arraytComparables[i].getHeight() / 1) % 10;
-                output[count[index] - 1] = arraytComparables[i];
-                count[index]--;
-            }
-            
-            System.arraycopy(output, 0, arraytComparables, 0, arraytComparables.length);
             
     }
 }
