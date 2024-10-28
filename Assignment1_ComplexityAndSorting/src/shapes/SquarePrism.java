@@ -11,7 +11,7 @@ public class SquarePrism extends Shape
 
     @Override
     public double calcVolume() {
-        return side * side * getHeight();
+        return side * side * height;
     }
 
     @Override

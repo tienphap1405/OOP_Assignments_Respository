@@ -1,7 +1,11 @@
 package appDomain;
 import utilities.ReadFile;
 import java.io.FileNotFoundException;
+import java.util.Comparator;
+import shapes.AreaComparator;
+import shapes.Cylinder;
 import shapes.Shape;
+import shapes.VolumeComparator;
 import utilities.Sorting;
 
 
@@ -71,13 +75,16 @@ public class AppDriver
             }
             
             // Determine comparison property
+            // If the comparator is null then it will use the comparable which will compare the height
             switch (comparisonProperty) {
                 case "a":
+                    Sorting.SelectionSort(shapesArray, new AreaComparator());
                     break;
                 case "v":
-                    Sorting.SelectionSort(shapesArray, comparisonProperty);
+                    Sorting.SelectionSort(shapesArray, new VolumeComparator());
                     break;
                 case "h":
+                    Sorting.SelectionSort(shapesArray, null);
                     break;
                 default:
                     return;
@@ -90,7 +97,7 @@ public class AppDriver
             for (Shape shape: shapesArray) {
                 System.out.println(shape.getHeight());
             }
-           
+          
                 
 		// TODO Auto-generated method stub
 

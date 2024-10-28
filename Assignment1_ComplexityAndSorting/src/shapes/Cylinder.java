@@ -14,7 +14,7 @@ public class Cylinder extends Shape
 
     @Override
     public double calcVolume() {
-        return Math.PI * radius * radius * getHeight();
+        return Math.PI * radius * radius * height;
     }
 
     @Override

@@ -16,7 +16,7 @@ public class OctagonalPrism extends Shape
     
     @Override
     public double calcVolume() {
-        return calcBaseArea() * getHeight();
+        return calcBaseArea() * height;
     }
 
 }
