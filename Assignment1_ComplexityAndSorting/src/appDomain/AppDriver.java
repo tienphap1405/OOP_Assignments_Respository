@@ -48,11 +48,16 @@ public class AppDriver
                 }    
             }
             
-            if (!(comparisonProperty.equals("v") || 
-                    comparisonProperty.equals("h") || 
-                    comparisonProperty.equals("a"))) {
-                System.err.println("Invalid comparison property, enter h, a, or v");
-                return;
+            Comparator<Shape> comparator;
+            
+            switch (comparisonProperty) {
+                case "h" -> comparator = null;
+                case "a" -> comparator = new AreaComparator();
+                case "v" -> comparator = new VolumeComparator();
+                default -> {
+                    System.err.println("Invalid comparison property, enter h, a, or v");
+                    return;
+                }
             }
             
             Shape[] shapesArray;
@@ -66,29 +71,29 @@ public class AppDriver
                 return;
             }
             
-            // Testing 
-            System.out.println("Pre-Sorting");
-            printArray(shapesArray, comparisonProperty);
 
+            // Creating a copy of the array before sorting
+            Shape[] unsortedShapesArray = shapesArray;
+            
             // Determine comparison property
 
             switch (sortingMethod) {
-                case "i" -> Sorting.InsertionSort(shapesArray);
-                case "s" -> Sorting.SelectionSort(shapesArray);
-                case "b" -> Sorting.BubbleSort(shapesArray);
-                case "q" -> Sorting.QuickSort(shapesArray, 0, shapesArray.length - 1);
-                case "m" -> Sorting.MergeSort(shapesArray, 0, shapesArray.length - 1);
+                case "i" -> Sorting.InsertionSort(shapesArray, comparator);
+                case "s" -> Sorting.SelectionSort(shapesArray, comparator);
+                case "b" -> Sorting.BubbleSort(shapesArray, comparator);
+                case "q" -> Sorting.QuickSort(shapesArray, 0, shapesArray.length - 1, comparator);
+                case "m" -> Sorting.MergeSort(shapesArray, 0, shapesArray.length - 1, comparator);
                 case "z" -> System.out.println("Missing sorting method");
                 default -> {
                     System.err.println("Invalid sorting method, enter: i, s, b, q, m or z");
-
                     return;
                 }
             }             
             
             // Testing 
+            System.out.println("Pre-Sorting");
+            printArray(unsortedShapesArray, comparisonProperty);
             System.out.println("\n\n\nPost-Sorting");
-
             printArray(shapesArray, comparisonProperty);
            
 
