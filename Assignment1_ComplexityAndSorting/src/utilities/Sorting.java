@@ -64,7 +64,7 @@ public class Sorting {
     
     //
     
-    public static void SelectionSort(Comparable[] arrayComparables){
+    public static void SelectionSort(Comparable[] arrayComparables, String comparisonProperty){
         int size = arrayComparables.length; 
         for (int i = 0; i < size; i++){
             Comparable minValue = arrayComparables[i];
