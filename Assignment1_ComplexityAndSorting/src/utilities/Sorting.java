@@ -201,7 +201,7 @@ public class Sorting {
 
                 // Find the position to put the item
                 for (int i = cycleStart + 1; i < n; i++) {
-                    if (arraytComparables[i].compareTo(item) < 0) {
+                    if (compare(arraytComparables[i], item, comparator) < 0) {
                         pos++;
                     }
                 }
