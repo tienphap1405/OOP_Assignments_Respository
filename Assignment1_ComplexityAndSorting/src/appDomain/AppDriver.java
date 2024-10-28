@@ -19,7 +19,7 @@ public class AppDriver
             
             testing[0] = "-Fshapes1.txt";
             testing[1] = "-Th";
-            testing[2] = "-Sm";
+            testing[2] = "-Ss";
             
             if (testing.length != 3) {
                 System.err.println("Invalid Input - requires 3 arguments");
