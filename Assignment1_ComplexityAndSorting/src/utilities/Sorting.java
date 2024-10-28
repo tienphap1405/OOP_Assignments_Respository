@@ -166,7 +166,57 @@ public class Sorting {
     }
     
     public static void cycleSort(Shape[] arraytComparables, Comparator<Shape> comparator){
-            
+            int n = arraytComparables.length;
+
+        // Traverse the array elements and put them in their correct position
+        for (int cycleStart = 0; cycleStart < n - 1; cycleStart++) {
+            Shape item = arraytComparables[cycleStart];
+
+            // Find the position where we put the element
+            int pos = cycleStart;
+            for (int i = cycleStart + 1; i < n; i++) {
+                if (compare(arraytComparables[i], item, comparator) < 0) {
+                    pos++;
+                }
+            }
+
+            // If the item is already in the correct position, continue
+            if (pos == cycleStart) {
+                continue;
+            }
+
+            // Skip duplicate items
+            while (item.equals(arraytComparables[pos])) {
+                pos++;
+            }
+
+            // Put the item in its right position
+            Shape temp = arraytComparables[pos];
+            arraytComparables[pos] = item;
+            item = temp;
+
+            // Rotate the rest of the cycle
+            while (pos != cycleStart) {
+                pos = cycleStart;
+
+                // Find the position to put the item
+                for (int i = cycleStart + 1; i < n; i++) {
+                    if (arraytComparables[i].compareTo(item) < 0) {
+                        pos++;
+                    }
+                }
+
+                // Skip duplicates
+                while (item.equals(arraytComparables[pos])) {
+                    pos++;
+                }
+
+                // Swap the item with the one at its correct position
+                temp = arraytComparables[pos];
+                arraytComparables[pos] = item;
+                item = temp;
+            }
+        }
             
     }
 }
