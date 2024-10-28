@@ -1,9 +1,9 @@
 package utilities;
 
 import shapes.Shape;
+import java.util.Comparator;
 import shapes.AreaComparator;
 import shapes.VolumeComparator;
-import java.util.Comparator;
 
 
 public class Sorting {
@@ -19,7 +19,7 @@ public class Sorting {
         }
     }
     
-    public static void Swap(Shape[] arrayComparables, int i, int j){
+    public static void swap(Shape[] arrayComparables, int i, int j){
         Shape temp = arrayComparables[i];
         arrayComparables[i] = arrayComparables[j];
         arrayComparables[j] = temp;
@@ -29,7 +29,7 @@ public class Sorting {
     // Example array [10 4 5 9 8 6 1 2 7 3 77] --> l = 0; m = 6; r = 10
     // after divided: leftarray = [10 4 5 9 8 6 1]  |  rightarray = [2 7 3 77] 
     
-    public static void Merging (Shape[] totalComparables, int l, int m, int r, Comparator<Shape> comparator){
+    public static void merging (Shape[] totalComparables, int l, int m, int r, Comparator<Shape> comparator){
         // Find the size of the 2 arrays that need to be merged
         int leftSize = m - l + 1; //(size = 7)
         int rightSize = r - m; //(size = 4)
@@ -77,10 +77,28 @@ public class Sorting {
     }
     
     
-    //
+    public static int maxValue(Shape[] shapes, Comparator<Shape> comparator) {
+        
+        int size = shapes.length;
+        int max = 0;
+        // int max = (int)shapes[0].calcBaseArea;
+        for (int i = 1; i < size; i++) {
+            if (compare(shapes[i-1], shapes[i], comparator) >= 0) {
+                if (comparator == null) {
+                    max = (int)shapes[i].getHeight();    
+                }
+                else if (comparator instanceof AreaComparator)
+                    max = (int)shapes[i].calcBaseArea();
+                else {
+                    max = (int)shapes[i].calcVolume();
+                }
+            }
+        }
+        return max;
+    }
     
 
-    public static void SelectionSort(Shape[] arrayComparables, Comparator<Shape> comparator){
+    public static void selectionSort(Shape[] arrayComparables, Comparator<Shape> comparator){
         int size = arrayComparables.length; 
         for (int i = 0; i < size; i++){
             Shape minValue = arrayComparables[i];
@@ -92,21 +110,20 @@ public class Sorting {
                     minIndex = j;
                 }
             }
-            Swap(arrayComparables, minIndex, i);
+            swap(arrayComparables, minIndex, i);
         }
         
     }
 
     
-    
     // Recursion to divide the array to one sorted value array then merging (Dividing and Conquering method)
-    public static void MergeSort(Shape[] arrayComparables, int l, int r, Comparator<Shape> comparator){
+    public static void mergeSort(Shape[] arrayComparables, int l, int r, Comparator<Shape> comparator){
         if(l < r){
             int m = l + (r - l) / 2;
-            MergeSort(arrayComparables, l, m, comparator);
-            MergeSort(arrayComparables, m + 1, r, comparator);
+            mergeSort(arrayComparables, l, m, comparator);
+            mergeSort(arrayComparables, m + 1, r, comparator);
             
-            Merging(arrayComparables, l, m, r, comparator);
+            merging(arrayComparables, l, m, r, comparator);
         }
         
         
@@ -118,8 +135,8 @@ public class Sorting {
     // The left pointer will move to the right and stop when a value is larger than the pivot
     // as the right pointer move to the left and stop when the value is smaller than the pivot
     // When both pointer stop, the swap method will swap the 2 pointer value
-    // When the pointers meet, Swap the pivot to the leftpointer position.
-    public static void QuickSort(Shape[] arrayComparables, int lowIndex, int highIndex, Comparator<Shape> comparator){
+    // When the pointers meet, swap the pivot to the leftpointer position.
+    public static void quickSort(Shape[] arrayComparables, int lowIndex, int highIndex, Comparator<Shape> comparator){
         if(lowIndex >= highIndex) {
             return;
         }
@@ -134,18 +151,56 @@ public class Sorting {
             while (compare(arrayComparables[rightPointer], pivot, comparator) >= 0 && leftPointer < rightPointer){
                 rightPointer--;
             }
-            Swap(arrayComparables, leftPointer, rightPointer);
+            swap(arrayComparables, leftPointer, rightPointer);
         }
-        Swap(arrayComparables, leftPointer, highIndex);
-        QuickSort(arrayComparables, lowIndex, leftPointer - 1, comparator);
-        QuickSort(arrayComparables, leftPointer + 1, highIndex, comparator);
+        swap(arrayComparables, leftPointer, highIndex);
+        quickSort(arrayComparables, lowIndex, leftPointer - 1, comparator);
+        quickSort(arrayComparables, leftPointer + 1, highIndex, comparator);
     }
 
     
-    public static void BubbleSort(Shape[] arrayComparables, Comparator<Shape> comparator){
-
+    public static void bubbleSort(Shape[] arrayComparables, Comparator<Shape> comparator){
+        int size = arrayComparables.length; 
+        for (int i=0; i<size-1; i++) {
+            for (int j=1; j<size-i; j++){
+                if (compare(arrayComparables[j-1], arrayComparables[j], comparator) >= 0) {
+                    swap(arrayComparables, j-1, j);
+                }         
+           }
+        }
+        
     } 
-    public static void InsertionSort(Shape[] arraytComparables, Comparator<Shape> comparator){
+    
+    public static void insertionSort(Shape[] arraytComparables, Comparator<Shape> comparator){
 
+    }
+    
+    public static void radixSort(Shape[] arraytComparables, Comparator<Shape> comparator, String comparisonType){
+            
+            // Testing Radix Sort
+            Shape[] output = new Shape[arraytComparables.length];
+            int[] count = new int[10];
+            
+            // How many times each digit appears from 0-9 and storing it in count
+            for (int i = 0; i < arraytComparables.length; i++) {
+                int index = (int)((arraytComparables[i].getHeight() / 1) % 10);
+                count[index]++;
+            }   
+            
+            // Accumulating the number of counted objects
+            for (int i = 1; i < 10; i++) {
+                count[i] += count[i - 1];
+            }
+            
+            
+            // Last step to sort the first time
+            for (int i = (arraytComparables.length - 1); i >=0; i--) {
+                int index = (int)(arraytComparables[i].getHeight() / 1) % 10;
+                output[count[index] - 1] = arraytComparables[i];
+                count[index]--;
+            }
+            
+            System.arraycopy(output, 0, arraytComparables, 0, arraytComparables.length);
+            
     }
 }
