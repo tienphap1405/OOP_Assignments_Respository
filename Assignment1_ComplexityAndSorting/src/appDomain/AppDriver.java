@@ -91,13 +91,12 @@ public class AppDriver
                 case "b" -> Sorting.bubbleSort(shapesArray, comparator);
                 case "q" -> Sorting.quickSort(shapesArray, 0, shapesArray.length - 1, comparator);
                 case "m" -> Sorting.mergeSort(shapesArray, 0, shapesArray.length - 1, comparator);
-                case "z" -> Sorting.radixSort(shapesArray, comparator, comparisonType);
+                case "z" -> Sorting.cycleSort(shapesArray, comparator);
                 default -> {
                     System.err.println("Invalid sorting method, enter: i, s, b, q, m or z");
                     return;
                 }
             }
-            
             
             // Testing 
             System.out.println("\n\n\nPost-Sorting");
@@ -106,9 +105,7 @@ public class AppDriver
             long stop = System.nanoTime();
             System.out.println("Time" + (stop - start));
             
-            System.out.println("\nHighest Value in Comparison");
-            int value = Sorting.maxValue(shapesArray, comparator);
-            System.out.println(value);
+            
             
 	}
         
