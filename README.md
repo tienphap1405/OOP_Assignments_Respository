@@ -3,9 +3,9 @@ The program is not generic and can only be executed based on shapes.
 
 
 **Steps to use the Sorting Program:**
-Using Netbeans will auto compiled all the .java files and create the .jar file in the dist folders.
-Navigate to the root directory and open the terminal
-Input the following command line: java -jar .\dist\Sort.jar -sb -tv -f"shapes1.txt"
+	- Using Netbeans will auto compiled all the .java files and create the .jar file in the dist folders.
+	  Navigate to the root directory and open the terminal
+	  Input the following command line: java -jar .\dist\Sort.jar -sb -tv -f"shapes1.txt"
 **Arguments to input:**
         -f”..”: Input the file name that will be executed with sorting algorithms.
         -s.. (b: Bubble Sort, s: Selection Sort, i: Insertion Sort, m: Merge Sort, q: Quick Sort, z: Cycle Sort) with no spaces, can be upper or lower cases.
