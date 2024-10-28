@@ -27,4 +27,21 @@ public abstract class Shape {
     public abstract double calcVolume();
     
     public abstract double calcBaseArea();
+<<<<<<< Updated upstream
+=======
+
+    @Override
+    public int compareTo(Shape otherShape) {
+        double compareHeight = this.height - otherShape.height;
+        if(compareHeight > 0){
+            return -1;
+        }
+        else if (compareHeight < 0){
+            return 1;
+        }
+        else{
+            return 0;
+        }
+    }
+>>>>>>> Stashed changes
 }
