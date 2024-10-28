@@ -21,7 +21,7 @@ public class AppDriver
             // -f(filepath)
             testing[0] = "-Fshapes1.txt";
             // -t(Comparitve Property)
-            testing[1] = "-Ta";
+            testing[1] = "-Tv";
 
             // -s(Sorting Method)
             testing[2] = "-Sz";
@@ -83,7 +83,7 @@ public class AppDriver
             printArray(shapesArray, comparisonType);
             
             // Determine comparison property
-            long start = System.nanoTime();
+            long start = System.currentTimeMillis();
             
             switch (sortingMethod) {
                 case "i" -> Sorting.insertionSort(shapesArray, comparator);
@@ -102,8 +102,8 @@ public class AppDriver
             System.out.println("\n\n\nPost-Sorting");
             printArray(shapesArray, comparisonType);
             
-            long stop = System.nanoTime();
-            System.out.println("Time" + (stop - start));
+            long stop = System.currentTimeMillis();
+            System.out.println("Time: " + (stop - start) + " Milliseconds");
             
             
             

@@ -166,55 +166,62 @@ public class Sorting {
     }
     
     public static void cycleSort(Shape[] arraytComparables, Comparator<Shape> comparator){
-            int n = arraytComparables.length;
+        
+        int size = arraytComparables.length;
 
-        // Traverse the array elements and put them in their correct position
-        for (int cycleStart = 0; cycleStart < n - 1; cycleStart++) {
-            Shape item = arraytComparables[cycleStart];
+        // Go through the array and place each shape in their correct position
+        for (int cycleStart = 0; cycleStart < size - 1; cycleStart++) {
+            
+            Shape shape = arraytComparables[cycleStart];
 
-            // Find the position where we put the element
-            int pos = cycleStart;
-            for (int i = cycleStart + 1; i < n; i++) {
-                if (compare(arraytComparables[i], item, comparator) < 0) {
-                    pos++;
+            // Find the position where we place the shape
+            int currentPosition = cycleStart;
+            for (int i = cycleStart + 1; i < size; i++) {
+                if (compare(arraytComparables[i], shape, comparator) < 0) {
+                    currentPosition++;
                 }
             }
 
-            // If the item is already in the correct position, continue
-            if (pos == cycleStart) {
+            // If the shape is already in the correct position,
+            // continue to the next iteration
+            if (currentPosition == cycleStart) {
                 continue;
             }
 
-            // Skip duplicate items
-            while (item.equals(arraytComparables[pos])) {
-                pos++;
+            // Skip duplicate values by placing the shape one position further
+            while (shape.equals(arraytComparables[currentPosition])) {
+                currentPosition++;
             }
 
-            // Put the item in its right position
-            Shape temp = arraytComparables[pos];
-            arraytComparables[pos] = item;
-            item = temp;
+            // Put the shape in its right position, store the replaced shape
+            // Specialized swap that doesnt swap the positions of 2 objects in an
+            // array, it only replaces one and stores the other.
+            Shape temp = arraytComparables[currentPosition];
+            arraytComparables[currentPosition] = shape;
+            shape = temp;
 
             // Rotate the rest of the cycle
-            while (pos != cycleStart) {
-                pos = cycleStart;
+            while (currentPosition != cycleStart) {
+                
+                // Same as before
+                currentPosition = cycleStart;
 
-                // Find the position to put the item
-                for (int i = cycleStart + 1; i < n; i++) {
-                    if (compare(arraytComparables[i], item, comparator) < 0) {
-                        pos++;
+                // Find the position to put the shape
+                for (int i = cycleStart + 1; i < size; i++) {
+                    if (compare(arraytComparables[i], shape, comparator) < 0) {
+                        currentPosition++;
                     }
                 }
 
-                // Skip duplicates
-                while (item.equals(arraytComparables[pos])) {
-                    pos++;
+                // Skip duplicates shapes
+                while (shape.equals(arraytComparables[currentPosition])) {
+                    currentPosition++;
                 }
 
                 // Swap the item with the one at its correct position
-                temp = arraytComparables[pos];
-                arraytComparables[pos] = item;
-                item = temp;
+                temp = arraytComparables[currentPosition];
+                arraytComparables[currentPosition] = shape;
+                shape = temp;
             }
         }
             
