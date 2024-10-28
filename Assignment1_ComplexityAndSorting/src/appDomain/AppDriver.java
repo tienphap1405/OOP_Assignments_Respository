@@ -1,7 +1,11 @@
 package appDomain;
 import utilities.ReadFile;
 import java.io.FileNotFoundException;
+import java.util.Comparator;
+import shapes.AreaComparator;
+import shapes.Cylinder;
 import shapes.Shape;
+import shapes.VolumeComparator;
 import utilities.Sorting;
 
 
@@ -67,6 +71,7 @@ public class AppDriver
             printArray(shapesArray, comparisonProperty);
 
             // Determine comparison property
+
             switch (sortingMethod) {
                 case "i" -> Sorting.InsertionSort(shapesArray);
                 case "s" -> Sorting.SelectionSort(shapesArray);
@@ -76,12 +81,14 @@ public class AppDriver
                 case "z" -> System.out.println("Missing sorting method");
                 default -> {
                     System.err.println("Invalid sorting method, enter: i, s, b, q, m or z");
+
                     return;
                 }
             }             
             
             // Testing 
             System.out.println("\n\n\nPost-Sorting");
+
             printArray(shapesArray, comparisonProperty);
            
 

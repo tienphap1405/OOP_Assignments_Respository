@@ -17,7 +17,7 @@ public class PentagonalPrism extends Shape
     
     @Override
     public double calcVolume() {
-        return calcBaseArea() * getHeight();
+        return calcBaseArea() * height;
     }
     
 }

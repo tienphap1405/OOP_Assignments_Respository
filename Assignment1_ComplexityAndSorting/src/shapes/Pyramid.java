@@ -11,7 +11,7 @@ public class Pyramid extends Shape
 
     @Override
     public double calcVolume() {
-        return (side * side * getHeight()) / 3;
+        return (side * side * height) / 3;
     }
 
     @Override

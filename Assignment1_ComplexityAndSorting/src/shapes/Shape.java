@@ -10,7 +10,7 @@ package shapes;
  * @author tienp
  */
 public abstract class Shape implements Comparable<Shape>{
-    private double height;
+    protected double height;
     
     public Shape(double height){
         this.height = height;
