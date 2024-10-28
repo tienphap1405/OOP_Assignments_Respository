@@ -11,6 +11,6 @@ The program is not generic and can only be executed based on shapes.
 	        -f”..”: Input the file name that will be executed with sorting algorithms.
 	        -s.. (b: Bubble Sort, s: Selection Sort, i: Insertion Sort, m: Merge Sort, q: Quick Sort, z: Cycle Sort) with no spaces, can be upper or lower cases.
 	        -t.. (h: Sorting by height, v: Sorting by Volumes, a: Sorting by Based Area) with no spaces, can be upper or lower cases.
-	        Ex: java -jar .\dist\Sort.jar -sm -th -f"shapes1.txt"
-			        java -jar .\dist\Sort.jar -ss -f"shapes2.txt" -ta 
-	            java -jar .\dist\Sort.jar -f"shapes3.txt" -sq -tv 
+		Ex: 	java -jar .\dist\Sort.jar -sm -th -f"shapes1.txt"
+			java -jar .\dist\Sort.jar -ss -f"shapes2.txt" -ta 
+			java -jar .\dist\Sort.jar -f"shapes3.txt" -sq -tv 
