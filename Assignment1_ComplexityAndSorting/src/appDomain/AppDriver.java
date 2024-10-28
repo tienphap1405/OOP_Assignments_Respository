@@ -21,10 +21,10 @@ public class AppDriver
             // -f(filepath)
             testing[0] = "-Fshapes1.txt";
             // -t(Comparitve Property)
-            testing[1] = "-Th";
+            testing[1] = "-Ta";
 
             // -s(Sorting Method)
-            testing[2] = "-Si";
+            testing[2] = "-Sz";
 
             
             if (testing.length != 3) {
