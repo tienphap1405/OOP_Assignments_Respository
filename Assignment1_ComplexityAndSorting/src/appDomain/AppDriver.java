@@ -14,6 +14,7 @@ public class AppDriver
 {
 	public static void main( String[] args )
 	{
+
                         
             if (args.length != 3) {
                 System.err.println("Invalid Input - requires 3 arguments");
@@ -73,7 +74,7 @@ public class AppDriver
             printArray(shapesArray, comparisonType);
             
             // Determine comparison property
-            long start = System.nanoTime();
+            long start = System.currentTimeMillis();
             
             switch (sortingMethod) {
                 case "i" -> Sorting.insertionSort(shapesArray, comparator);
@@ -92,8 +93,8 @@ public class AppDriver
             System.out.println("\n\n\nPost-Sorting");
             printArray(shapesArray, comparisonType);
             
-            long stop = System.nanoTime();
-            System.out.println("Time" + (stop - start));
+            long stop = System.currentTimeMillis();
+            System.out.println("Time: " + (stop - start) + " Milliseconds");
             
             
             
