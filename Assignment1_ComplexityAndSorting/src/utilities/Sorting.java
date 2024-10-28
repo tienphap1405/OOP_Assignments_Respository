@@ -79,6 +79,7 @@ public class Sorting {
     
     //
     
+
     public static void SelectionSort(Shape[] arrayComparables, Comparator<Shape> comparator){
         int size = arrayComparables.length; 
         for (int i = 0; i < size; i++){

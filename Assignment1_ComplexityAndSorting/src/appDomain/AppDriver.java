@@ -18,7 +18,7 @@ public class AppDriver
             String[] testing = new String[3];
             
             testing[0] = "-Fshapes1.txt";
-            testing[1] = "-Tv";
+            testing[1] = "-Th";
             testing[2] = "-Sm";
             
             if (testing.length != 3) {
@@ -27,41 +27,39 @@ public class AppDriver
             }
             
             
-            String filePath = null;
-            String comparisonProperty = null;
-            String sortingMethod = null;
+            String filePath = "";
+            String comparisonProperty = "";
+            String sortingMethod = "";
             
-            for (int i=0; i < testing.length; i++) {
-                
-                String category = testing[i].substring(0, 2);
-                
-                String input = testing[i].substring(2);
+            for (String testing1 : testing) {
+                String category = testing1.substring(0, 2);
+                String input = testing1.substring(2);
+                // System.err.println(category == "-f");
                 
                 switch (category.toLowerCase()) {
-                    case "-f":
-                        // Determine the file path
-                        filePath = input;
-                        break;
-                    case "-t":
-                        // Determine the compared property
-                        comparisonProperty = input.toLowerCase();
-                        break;
-                    case "-s":
-                        sortingMethod = input.toLowerCase();
-                        break;
-                    default:
+                    case "-f" -> filePath = input;
+                    case "-t" -> comparisonProperty = input.toLowerCase();
+                    case "-s" -> sortingMethod = input.toLowerCase();
+                    default -> {
                         System.err.println("Invalid Input: " + category);
-                        System.err.println("Enter -f(filepath) -t(compared property) -s(sorting method)");
+                        System.err.println("Enter -f(filepath) -t(comparison property) -s(sorting method)");
                         return;
+                    }
                 }    
             }
             
+            if (!(comparisonProperty.equals("v") || 
+                    comparisonProperty.equals("h") || 
+                    comparisonProperty.equals("a"))) {
+                System.err.println("Invalid comparison property, enter h, a, or v");
+                return;
+            }
             
             Shape[] shapesArray;
                    
             try {
                 shapesArray = ReadFile.loadShapes(filePath);
-                System.out.println("File Found");
+                System.out.println("File Found\n");
             }
             catch (FileNotFoundException ex) {
                 System.err.println("File Not Found!!");
@@ -70,52 +68,62 @@ public class AppDriver
             
             // Testing 
             System.out.println("Pre-Sorting");
-            for (Shape shape: shapesArray) {
-                System.out.println(shape.getHeight());
-            }
-            
+            printArray(shapesArray, comparisonProperty);
+
             // Determine comparison property
-            // If the comparator is null then it will use the comparable which will compare the height
-            switch (comparisonProperty) {
-                case "a":
-                    Sorting.SelectionSort(shapesArray, new AreaComparator());
-                    break;
-                case "v":
-                    Sorting.SelectionSort(shapesArray, new VolumeComparator());
-                    break;
-                case "h":
-                    Sorting.SelectionSort(shapesArray, null);
-                    break;
-                default:
+
+            switch (sortingMethod) {
+                case "i" -> Sorting.InsertionSort(shapesArray);
+                case "s" -> Sorting.SelectionSort(shapesArray);
+                case "b" -> Sorting.BubbleSort(shapesArray);
+                case "q" -> Sorting.QuickSort(shapesArray, 0, shapesArray.length - 1);
+                case "m" -> Sorting.MergeSort(shapesArray, 0, shapesArray.length - 1);
+                case "z" -> System.out.println("Missing sorting method");
+                default -> {
+                    System.err.println("Invalid sorting method, enter: i, s, b, q, m or z");
+
                     return;
-            }
-            
-                       
+                }
+            }             
             
             // Testing 
             System.out.println("\n\n\nPost-Sorting");
-            for (Shape shape: shapesArray) {
-                System.out.println(shape.getHeight());
-            }
-          
-                
-		// TODO Auto-generated method stub
 
-		// refer to demo001 BasicFileIO.java for a simple example on how to
-		// read data from a text file
+            printArray(shapesArray, comparisonProperty);
+           
 
-		// refer to demo01 Test.java for an example on how to parse command
-		// line arguments and benchmarking tests
+            // refer to demo01 Test.java for an example on how to parse command
+            // line arguments and benchmarking tests
 
-		// refer to demo02 Student.java for comparable implementation, and
-		// NameCompare.java or GradeCompare for comparator implementations
 
-		// refer to demo02 KittySort.java on how to use a custom sorting
-		// algorithm on a list of comparables to sort using either the
-		// natural order (comparable) or other orders (comparators)
+            // refer to demo02 KittySort.java on how to use a custom sorting
+            // algorithm on a list of comparables to sort using either the
+            // natural order (comparable) or other orders (comparators)
 
-		// refer to demo03 OfficeManager.java on how to create specific
-		// objects using reflection from a String
 	}
+        
+        private static void printArray(Shape[] array, String property) {
+            switch (property) {
+                case "h" -> {
+                    for (Shape shape: array) {
+                        System.out.println(shape.getHeight());
+                    }
+                }
+                case "a" -> {
+                    for (Shape shape: array) {
+                        System.out.println(shape.calcBaseArea());
+                    }
+                }
+                case "v" -> {
+                    for (Shape shape: array) {
+                        System.out.println(shape.calcVolume());
+                    }
+                }
+                default -> {
+                    System.out.println("Unable to display");
+                    return;
+                }
+            }
+        }
 
 }
