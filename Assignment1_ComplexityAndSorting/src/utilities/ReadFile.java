@@ -13,7 +13,7 @@ public class ReadFile {
     
     /**
      *
-     * @param filePath
+     * @param filePath file path
      * @return array of Shapes when loading and parse to objects which store into the array
      * @throws FileNotFoundException
      * Only works on userInputs -fshapes1.txt, -fshapes2.txt and -fshapes3.txt

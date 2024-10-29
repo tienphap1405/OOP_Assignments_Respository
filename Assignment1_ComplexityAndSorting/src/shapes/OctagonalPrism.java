@@ -10,8 +10,8 @@ public class OctagonalPrism extends Shape
 
     /**
      *
-     * @param height
-     * @param side
+     * @param height height
+     * @param side side length
      */
     public OctagonalPrism(double height, double side) {
         super(height);

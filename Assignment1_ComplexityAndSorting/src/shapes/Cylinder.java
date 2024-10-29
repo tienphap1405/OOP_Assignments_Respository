@@ -10,8 +10,8 @@ public class Cylinder extends Shape
 
     /**
      *
-     * @param height
-     * @param radius
+     * @param height height
+     * @param radius radius
      */
     public Cylinder(double height, double radius) {
         super(height);

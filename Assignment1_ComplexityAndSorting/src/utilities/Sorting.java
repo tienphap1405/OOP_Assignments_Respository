@@ -2,8 +2,6 @@ package utilities;
 
 import shapes.Shape;
 import java.util.Comparator;
-import shapes.AreaComparator;
-import shapes.VolumeComparator;
 
 /**
  *
@@ -16,9 +14,9 @@ public class Sorting {
     
     /**
      *
-     * @param s1
-     * @param s2
-     * @param comparator
+     * @param s1 shape object 1
+     * @param s2 shape object 2
+     * @param comparator Comparator that implements shape
      * @return the CompareTo method which will compare the height if 
      * the comparator is null
      * Else Using custom compare based on the volume or area
@@ -34,9 +32,9 @@ public class Sorting {
     
     /**
      *
-     * @param arrayComparables
-     * @param i
-     * @param j
+     * @param arrayComparables shape array
+     * @param i min index value
+     * @param j max index value
      */
     public static void swap(Shape[] arrayComparables, int i, int j){
         Shape temp = arrayComparables[i];
@@ -50,11 +48,11 @@ public class Sorting {
     /**
      *Example array [10 4 5 9 8 6 1 2 7 3 77] --> l = 0; m = 6; r = 10
      * after divided: left array = [10 4 5 9 8 6 1]  |  right array = [2 7 3 77] 
-     * @param totalComparables
-     * @param l
-     * @param m
-     * @param r
-     * @param comparator
+     * @param totalComparables shape array
+     * @param l min value index
+     * @param m middle value index
+     * @param r max value index
+     * @param comparator Comparator that implements shape
      * Find the size of the 2 arrays that need to be merged
      * Create temporary array
      * Append the value of the array to 2 sub arrays based on the size
@@ -110,8 +108,8 @@ public class Sorting {
     
     /**
      *
-     * @param arrayComparables
-     * @param comparator
+     * @param arrayComparables shape array
+     * @param comparator Comparator that implements shape
      *  
      * Sort the Shape objects using selection Sort
      * Time complexity and Space complexity: This selection sort algorithm 
@@ -139,10 +137,10 @@ public class Sorting {
     
     /**
      *
-     * @param arrayComparables
-     * @param l
-     * @param r
-     * @param comparator
+     * @param arrayComparables shape array
+     * @param l min index value
+     * @param r max index value
+     * @param comparator Comparator that implements shape
      * Sort the Shape objects using Merge Sort
      * Using Merging methods
      * Recursion to divide the array to one sorted value array then merging (Dividing and Conquering method)
@@ -172,10 +170,10 @@ public class Sorting {
      * as the right pointer move to the left and stop when the value is smaller than the pivot
      * When both pointer stop, the swap method will swap the 2 pointer value
      * When the pointers meet, swap the pivot to the left pointer position.
-     * @param arrayComparables
-     * @param lowIndex
-     * @param highIndex
-     * @param comparator
+     * @param arrayComparables shape array
+     * @param lowIndex min index value
+     * @param highIndex max index value
+     * @param comparator Comparator that implements shape
      * 
      * Sorting Shape objects using Quick Sort
      * Time complexity and Space complexity: This quick sort algorithm 
@@ -206,8 +204,8 @@ public class Sorting {
 
     /**
      *
-     * @param arrayComparables
-     * @param comparator
+     * @param arrayComparables shape array
+     * @param comparator Comparator that implements shape
      * Sorting Shape objects by using bubble Sort
      * Time complexity and Space complexity: This bubble sort algorithm
      * Time complexity is O(n^2)
@@ -227,8 +225,8 @@ public class Sorting {
     
     /**
      *
-     * @param arraytComparables
-     * @param comparator
+     * @param arraytComparables shape array
+     * @param comparator Comparator that implements shape
      * Sorting Shape objects using insertion Sort
      * Time complexity and Space complexity: This insertion sort algorithm
      * Time complexity is O(n^2)
@@ -251,8 +249,8 @@ public class Sorting {
     
     /**
      *
-     * @param arraytComparables
-     * @param comparator
+     * @param arraytComparables shape array
+     * @param comparator Comparator that implements shape
      * Sort Shape objects using cycle sort
      * Go through the array and place each shape in their correct position
      * Find the position where we place the shape

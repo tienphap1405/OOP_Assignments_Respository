@@ -10,8 +10,8 @@ public class Pyramid extends Shape
 
     /**
      *
-     * @param height
-     * @param side
+     * @param height height
+     * @param side side length
      */
     public Pyramid(double height, double side) {
         super(height);

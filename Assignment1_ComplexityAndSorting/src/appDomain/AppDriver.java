@@ -3,7 +3,6 @@ import utilities.ReadFile;
 import java.io.FileNotFoundException;
 import java.util.Comparator;
 import shapes.AreaComparator;
-import shapes.Cylinder;
 import shapes.Shape;
 import shapes.VolumeComparator;
 import utilities.Sorting;
@@ -17,7 +16,8 @@ public class AppDriver
 
     /**
      *
-     * @param args
+     * @param args array of command line arguments that must contain -f(file path), -t(comparisonType), -s(sorting method) 
+     *
      */
     public static void main( String[] args )
 	{

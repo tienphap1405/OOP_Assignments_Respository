@@ -20,7 +20,7 @@ public abstract class Shape implements Comparable<Shape>{
     
     /**
      * 
-     * @param height
+     * @param height height
      */
     public Shape(double height){
         this.height = height;

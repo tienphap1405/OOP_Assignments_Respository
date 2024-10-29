@@ -10,8 +10,8 @@ public class PentagonalPrism extends Shape
 
     /**
      *
-     * @param height
-     * @param side
+     * @param height height
+     * @param side side length
      */
     public PentagonalPrism(double height, double side) {
         super(height);

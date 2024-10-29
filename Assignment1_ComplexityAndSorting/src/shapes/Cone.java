@@ -10,8 +10,8 @@ public class Cone extends Shape
 
     /**
      *
-     * @param height
-     * @param radius
+     * @param height height
+     * @param radius radius
      */
     public Cone(double height, double radius) {
         super(height);

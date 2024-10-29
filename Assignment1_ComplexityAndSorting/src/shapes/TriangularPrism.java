@@ -10,8 +10,8 @@ public class TriangularPrism extends Shape
 
     /**
      *
-     * @param height
-     * @param side
+     * @param height height
+     * @param side side length
      */
     public TriangularPrism(double height, double side) {
         super(height);

@@ -11,8 +11,8 @@ public class VolumeComparator implements Comparator<Shape> {
 
     /**
      *
-     * @param s1
-     * @param s2
+     * @param s1 shape object 1
+     * @param s2 shape object 2
      * @return Descending order of Volume so if the shape 1 larger than shape 2 -> return -1;
      *  return 1 if shape 1 smaller than shape 2
      *  else return 0.
