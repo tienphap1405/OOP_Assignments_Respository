@@ -5,6 +5,7 @@ import java.util.Comparator;
 /**
  *
  * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
+ * Class for implementing comparator of areas of the shape objects
  */
 public class AreaComparator implements Comparator<Shape>{
 

@@ -8,6 +8,9 @@ import shapes.VolumeComparator;
 /**
  *
  * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
+ * Class for containing all sorting algorithms
+ * Using static for the purpose of utilizing it in the main method without creating
+ * instances 
  */
 public class Sorting {
     
@@ -109,7 +112,8 @@ public class Sorting {
      *
      * @param arrayComparables
      * @param comparator
-     * 
+     *  
+     * Sort the Shape objects using selection Sort
      */
     public static void selectionSort(Shape[] arrayComparables, Comparator<Shape> comparator){
         int size = arrayComparables.length; 
@@ -136,6 +140,8 @@ public class Sorting {
      * @param l
      * @param r
      * @param comparator
+     * Sort the Shape objects using Merge Sort
+     * Using Merging methods
      *Recursion to divide the array to one sorted value array then merging (Dividing and Conquering method)
      */
     public static void mergeSort(Shape[] arrayComparables, int l, int r, Comparator<Shape> comparator){
@@ -164,6 +170,8 @@ public class Sorting {
      * @param lowIndex
      * @param highIndex
      * @param comparator
+     * 
+     * Sorting Shape objects using Quick Sort
      */
     public static void quickSort(Shape[] arrayComparables, int lowIndex, int highIndex, Comparator<Shape> comparator){
         if(lowIndex >= highIndex) {
@@ -191,6 +199,7 @@ public class Sorting {
      *
      * @param arrayComparables
      * @param comparator
+     * Sorting Shape objects by using bubble Sort
      */
     public static void bubbleSort(Shape[] arrayComparables, Comparator<Shape> comparator){
         int size = arrayComparables.length; 
@@ -207,7 +216,8 @@ public class Sorting {
     /**
      *
      * @param arraytComparables
-     * @param comparator 
+     * @param comparator
+     * Sorting Shape objects using insertion Sort
      */
     public static void insertionSort(Shape[] arraytComparables, Comparator<Shape> comparator){
         for (int i = 1; i < arraytComparables.length; i++){
@@ -228,6 +238,7 @@ public class Sorting {
      *
      * @param arraytComparables
      * @param comparator
+     * Sort Shape objects using cycle sort
      * Go through the array and place each shape in their correct position
      * Find the position where we place the shape
      * If the shape is already in the correct position,

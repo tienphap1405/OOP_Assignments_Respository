@@ -5,6 +5,7 @@ import java.util.Comparator;
 /**
  *
  * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
+ * Class for comparing the volume of shapes objects
  */
 public class VolumeComparator implements Comparator<Shape> {
 
