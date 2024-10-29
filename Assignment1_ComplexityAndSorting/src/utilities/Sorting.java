@@ -114,6 +114,9 @@ public class Sorting {
      * @param comparator
      *  
      * Sort the Shape objects using selection Sort
+     * Time complexity and Space complexity: This selection sort algorithm 
+     * has a time complexity of O(n^2) 
+     * space complexity of O(1)
      */
     public static void selectionSort(Shape[] arrayComparables, Comparator<Shape> comparator){
         int size = arrayComparables.length; 
@@ -142,7 +145,10 @@ public class Sorting {
      * @param comparator
      * Sort the Shape objects using Merge Sort
      * Using Merging methods
-     *Recursion to divide the array to one sorted value array then merging (Dividing and Conquering method)
+     * Recursion to divide the array to one sorted value array then merging (Dividing and Conquering method)
+     * Time complexity and Space complexity: This merge sort algorithm 
+     * has a time complexity of O(n log n)
+     * has a space complexity of O(n)
      */
     public static void mergeSort(Shape[] arrayComparables, int l, int r, Comparator<Shape> comparator){
         if(l < r){
@@ -172,6 +178,9 @@ public class Sorting {
      * @param comparator
      * 
      * Sorting Shape objects using Quick Sort
+     * Time complexity and Space complexity: This quick sort algorithm 
+     * has a time complexity of average O(n log n) and worst case: O(n^2)
+     * has a space complexity of O(log n)
      */
     public static void quickSort(Shape[] arrayComparables, int lowIndex, int highIndex, Comparator<Shape> comparator){
         if(lowIndex >= highIndex) {
@@ -200,6 +209,9 @@ public class Sorting {
      * @param arrayComparables
      * @param comparator
      * Sorting Shape objects by using bubble Sort
+     * Time complexity and Space complexity: This bubble sort algorithm
+     * Time complexity is O(n^2)
+     * Space complexity is O(1)
      */
     public static void bubbleSort(Shape[] arrayComparables, Comparator<Shape> comparator){
         int size = arrayComparables.length; 
@@ -218,6 +230,9 @@ public class Sorting {
      * @param arraytComparables
      * @param comparator
      * Sorting Shape objects using insertion Sort
+     * Time complexity and Space complexity: This insertion sort algorithm
+     * Time complexity is O(n^2)
+     * Space complexity is O(1)
      */
     public static void insertionSort(Shape[] arraytComparables, Comparator<Shape> comparator){
         for (int i = 1; i < arraytComparables.length; i++){
@@ -252,6 +267,10 @@ public class Sorting {
      * Skip duplicates shapes
      * Swap the item with the one at its correct position
      * 
+     * 
+     * Time complexity and Space complexity: This cycle sort algorithm
+     * has a Time complexity of O(n^2)
+     * has a space complexity of O(1)
      */
     public static void cycleSort(Shape[] arraytComparables, Comparator<Shape> comparator){
         
