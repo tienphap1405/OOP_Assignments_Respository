@@ -279,46 +279,45 @@ public class Sorting {
         
         for (int cycleStart = 0; cycleStart < size - 1; cycleStart++) {
             
-            Shape shape = arraytComparables[cycleStart];
-
+            Shape shape = arraytComparables[cycleStart];           
+            int targetPosition = cycleStart;
             
-            int currentPosition = cycleStart;
             for (int i = cycleStart + 1; i < size; i++) {
                 if (compare(arraytComparables[i], shape, comparator) < 0) {
-                    currentPosition++;
+                    targetPosition++;
                 }
             }
 
             
-            if (currentPosition == cycleStart) {
+            if (targetPosition == cycleStart) {
                 continue;
             }
 
-            while (shape.equals(arraytComparables[currentPosition])) {
-                currentPosition++;
+            while (compare(arraytComparables[targetPosition], shape, comparator) == 0) {
+                targetPosition++;
             }
 
             
-            Shape temp = arraytComparables[currentPosition];
-            arraytComparables[currentPosition] = shape;
+            Shape temp = arraytComparables[targetPosition];
+            arraytComparables[targetPosition] = shape;
             shape = temp;
 
-            while (currentPosition != cycleStart) {
+            while (targetPosition != cycleStart) {
                 
-                currentPosition = cycleStart;
+                targetPosition = cycleStart;
 
                 for (int i = cycleStart + 1; i < size; i++) {
                     if (compare(arraytComparables[i], shape, comparator) < 0) {
-                        currentPosition++;
+                        targetPosition++;
                     }
                 }
 
-                while (shape.equals(arraytComparables[currentPosition])) {
-                    currentPosition++;
+                while (compare(arraytComparables[targetPosition], shape, comparator) == 0) {
+                    targetPosition++;
                 }
 
-                temp = arraytComparables[currentPosition];
-                arraytComparables[currentPosition] = shape;
+                temp = arraytComparables[targetPosition];
+                arraytComparables[targetPosition] = shape;
                 shape = temp;
             }
         }
