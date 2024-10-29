@@ -16,8 +16,12 @@ public class AppDriver
 
     /**
      *
-     * @param args array of command line arguments that must contain -f(file path), -t(comparisonType), -s(sorting method) 
-     *
+     * @param args array of command line arguments that must contain -f(file path), 
+     * -t(comparisonType), -s(sorting method).
+     * This program takes command line arguments from which it determines a file 
+     * to read from where it can create shape objects then it sorts them based on
+     * a shape property such as height and the sort method detected
+     * Then it displays the values to the user and prints how fast the program ran
      */
     public static void main( String[] args )
 	{
