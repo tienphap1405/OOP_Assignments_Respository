@@ -20,7 +20,7 @@ public class PentagonalPrism extends Shape
 
     /**
      *
-     * @return
+     * @return area of PentagonalPrism
      */
     @Override
     public double calcBaseArea() {
@@ -30,7 +30,7 @@ public class PentagonalPrism extends Shape
     
     /**
      *
-     * @return
+     * @return volume of PentagonalPrism
      */
     @Override
     public double calcVolume() {

@@ -20,7 +20,7 @@ public class SquarePrism extends Shape
 
     /**
      *
-     * @return
+     * @return volume of SquarePrism 
      */
     @Override
     public double calcVolume() {
@@ -29,7 +29,7 @@ public class SquarePrism extends Shape
 
     /**
      *
-     * @return
+     * @return area of SquarePrism
      */
     @Override
     public double calcBaseArea() {

@@ -14,13 +14,16 @@ public class ReadFile {
     /**
      *
      * @param filePath
-     * @return
+     * @return array of Shapes when loading and parse to objects which store into the array
      * @throws FileNotFoundException
+     * Only works on userInputs -fshapes1.txt, -fshapes2.txt and -fshapes3.txt
+     * Create a File and Scanner
+     * Read each line in the file
+     * 
      */
     public static Shape[] loadShapes(String filePath) throws FileNotFoundException {
        
-        // Only works on userInputs -fshapes1.txt, -fshapes2.txt and -fshapes3.txt
-        // Create a File and Scanner
+        
         File file = new File("src\\res\\" + filePath); 
         Scanner sc = new Scanner(file);
         
@@ -30,13 +33,12 @@ public class ReadFile {
         
         int counter = 0;
         
-        // Read each line in the file
         while (sc.hasNextLine()) {
             String[] parts = sc.nextLine().split(" ");
             
             String type = parts[0];
             double height = Double.parseDouble(parts[1]);
-            // side length or radius
+            /* side length or radius */
             double length = Double.parseDouble(parts[2]);
             
             switch (type) {
@@ -76,7 +78,7 @@ public class ReadFile {
             counter++;
         }
 
-        // Close the Scanner
+        /* Close the Scanner */
         sc.close();   
         return shapes;
     }    

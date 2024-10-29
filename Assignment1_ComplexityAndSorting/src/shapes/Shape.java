@@ -8,16 +8,18 @@ package shapes;
 /**
  *
  * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
+ * Implement Comparable type Shape to compare Shape's height
  */
 public abstract class Shape implements Comparable<Shape>{
 
     /**
-     *
+     * Height is initialized as protected for subclass to use the same height
+     * since every subclasses have the same height property
      */
     protected double height;
     
     /**
-     *
+     * 
      * @param height
      */
     public Shape(double height){
@@ -26,7 +28,7 @@ public abstract class Shape implements Comparable<Shape>{
 
     /**
      *
-     * @return
+     * @return height of the shape
      */
     public double getHeight() {
         return height;
@@ -42,20 +44,23 @@ public abstract class Shape implements Comparable<Shape>{
     
     /**
      *
-     * @return
+     * @return Create abstract method with no body for subclasses to implement
+     * and calculate the volume
      */
     public abstract double calcVolume();
     
     /**
      *
-     * @return
+     * @return Create abstract method with no body for subclasses to implement
+     * and calculate the area
      */
     public abstract double calcBaseArea();
 
     /**
      *
      * @param otherShape
-     * @return
+     * @return Descending -1 if shape 1 larger than shape 2
+     *          1 if shape 1 smaller than shape 2
      */
     @Override
     public int compareTo(Shape otherShape) {

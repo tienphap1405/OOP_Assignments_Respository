@@ -8,11 +8,18 @@ import shapes.Shape;
 import shapes.VolumeComparator;
 import utilities.Sorting;
 
-
-
+/**
+ *
+ * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
+ */
 public class AppDriver
 {
-	public static void main( String[] args )
+
+    /**
+     *
+     * @param args
+     */
+    public static void main( String[] args )
 	{
 
                         
@@ -45,6 +52,10 @@ public class AppDriver
                 }    
             }
             
+            /**
+            * Create comparator and assign the comparator param based on 
+            * the input of the user
+            **/
             Comparator<Shape> comparator;
             
             switch (comparisonType) {

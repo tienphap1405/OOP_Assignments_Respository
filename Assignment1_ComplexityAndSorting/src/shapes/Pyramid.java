@@ -20,7 +20,7 @@ public class Pyramid extends Shape
 
     /**
      *
-     * @return
+     * @return volume of Pyramid
      */
     @Override
     public double calcVolume() {
@@ -29,7 +29,7 @@ public class Pyramid extends Shape
 
     /**
      *
-     * @return
+     * @return area of Pyramid
      */
     @Override
     public double calcBaseArea() {

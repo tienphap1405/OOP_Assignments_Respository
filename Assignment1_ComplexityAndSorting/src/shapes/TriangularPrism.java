@@ -20,7 +20,7 @@ public class TriangularPrism extends Shape
 
     /**
      *
-     * @return
+     * @return area of TriangularPrism
      */
     @Override
     public double calcBaseArea() {
@@ -30,7 +30,7 @@ public class TriangularPrism extends Shape
      
     /**
      *
-     * @return
+     * @return volume of TriangularPrism
      */
     @Override
     public double calcVolume() {
