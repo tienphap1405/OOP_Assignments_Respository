@@ -8,9 +8,13 @@ package appDomain;
  *
  * @author tienp
  */
-public class NewClass {
-    public static void AppDriver(String args[]){
-        
+public class AppDriver {
+    public static void main(String args[]){
+        print("Hello");
+    }
+    
+    public static void print(Object message){
+        System.out.println(message);
     }
     
 }
