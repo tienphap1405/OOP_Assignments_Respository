@@ -29,7 +29,7 @@ public interface QueueADT<E> {
      * 
      * Pre-condition: The queue must contain at least one element.
      * Post condition: The first element is removed from the queue and
-     *                 the stack size decreases by one.
+     *                 the queue size decreases by one.
      * 
      * @return The element that was removed from the queue
      * @throws EmptyQueueException if the queue is empty
