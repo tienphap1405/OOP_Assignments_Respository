@@ -5,8 +5,10 @@
 package utilities;
 
 /**
- *
- * @author tienp
+ * This ADT defines the definition of the Queue Data Structure
+ * All the methods and functionalities in this interface must be implemented
+ * when creating a Queue Data Structure
+ * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
  */
 public interface QueueADT<E> {
     

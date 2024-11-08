@@ -5,8 +5,10 @@
 package utilities;
 
 /**
- *
- * @author tienp
+ * This ADT defines the definition of the Stack Data Structure
+ * All the methods and functionalities in this interface must be implemented
+ * when creating a Stack Data Structure
+ * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
  */
 public interface StackADT<E> {
     
