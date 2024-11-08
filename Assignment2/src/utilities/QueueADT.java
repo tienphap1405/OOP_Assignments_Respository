@@ -1,9 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package utilities;
+
 import ExceptionHandling.EmptyQueueException;
+
 /**
  * This ADT defines the definition of the Queue Data Structure
  * All the methods and functionalities in this interface must be implemented
@@ -12,65 +10,70 @@ import ExceptionHandling.EmptyQueueException;
  * @param <E> the generic type of elements
  */
 public interface QueueADT<E> {
+    
     /**
-     * This method Add the first element to the end of the queue
-     * 
-     * Pre-condition: the element must not be null
-     * Post condition: The queue size will be increase by one and the element is added in the end of the queue
-     * @param element Contain the generic item or element to add to the queue
-     * @throws NullPointerException will be thrown if the parameter element is null
-     */
+    * Adds an element to the end of the queue.
+    * 
+    * Pre-condition: The element must not be null.
+    * Post-condition: The element is added to the end of the queue, 
+    *                 and the queue size increases by one.
+    * 
+    * @param element The element to add to the queue
+    * @throws NullPointerException if the specified element is null
+    */
     public void enqueue(E element) throws NullPointerException;
     
     
     /**
-     * This method will remove the first element in the queue and return that element
+     * Removes and returns the first element from the queue.
      * 
-     * Pre-condition: the queue must contains at least one element and not be empty
-     * Post condition: the first element in the queue will be removed and the size
-     * and the size of the queue will be decreased by one
-     * @return the first previous item in the Queue
+     * Pre-condition: The queue must contain at least one element.
+     * Post condition: The first element is removed from the queue and
+     *                 the stack size decreases by one.
+     * 
+     * @return The element that was removed from the queue
      * @throws EmptyQueueException if the queue is empty
      */
     public E dequeue() throws EmptyQueueException;
     
-    
     /**
-     * This method read and return the first element in the queue
+     * Returns the first element in the queue without removing it.
      * 
-     * Pre-condition: the queue must contains at least one element and not be empty
-     * Post condition: returns the first element in the queue with no changes to the queue
-     * @return the first element in the queue
+     * Pre-condition: The queue must contain at least one element.
+     * Post condition: No changes are made to the queue.
+     * 
+     * @return The first element in the queue
      * @throws EmptyQueueException if the queue is empty
      */
     public E peek() throws EmptyQueueException;
     
     
     /**
-     * This method check if the queue is empty or not. True if empty and false if not empty
+     * Determines if the queue is empty.
      * 
      * Pre-condition: None.
-     * Post condition: return true if empty and false if not empty, no changes are made to the queue
-     * @return return true if empty and false if not empty
+     * Post condition: No changes are made to the queue.
+     * 
+     * @return true if the queue is empty and false if it is not empty
      */
     public boolean isEmpty();
     
-    
     /**
-     * This method return the size or length of the queue (numbers of elements in the queue)
+     * Determines the number of elements in the queue.
      * 
-     * Pre-condition: None
-     * Post condition: returns the size of the queue
-     * @return return the size or length of the queue (numbers of elements in the queue)
+     * Pre-condition: None.
+     * Post condition: No changes are made to the queue.
+     * 
+     * @return The number of elements in the queue
      */
     public int size();
     
     
     /**
-     * This method clear all elements in the queue
+     * Remove all elements from the queue.
      * 
-     * Pre-condition: None
-     * Post condition: the queue will be cleared and empty
+     * Pre-condition: None.
+     * Post condition: the queue is now empty.
      */
     public void clear();
     
