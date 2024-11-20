@@ -1,4 +1,4 @@
-package ExceptionHandling;
+package exceptions;
 
 /**
  *
