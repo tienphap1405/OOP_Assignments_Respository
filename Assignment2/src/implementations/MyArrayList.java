@@ -188,7 +188,7 @@ public class MyArrayList<E> implements ListADT<E> {
             toHold[i] = arrayData[i];
         }
         
-        return toHold;
+        return returnArray;
         
     }
 
