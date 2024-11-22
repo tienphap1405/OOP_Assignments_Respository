@@ -15,7 +15,7 @@ import utilities.QueueADT;
 public class MyQueue<E> implements QueueADT<E> {
     
     public MyDLL<E> dLinkedList = new MyDLL<>();
-    public int capacity = 1000;
+    public int capacity = 0;
     
     public MyQueue() { }
     
@@ -130,6 +130,11 @@ public class MyQueue<E> implements QueueADT<E> {
 
     @Override
     public boolean isFull() {
+        if (capacity == 0) {
+            // capacity 0 will be the default, which means
+            // there is no capacity limits
+            return false;
+        }
         return size() == capacity;
     }
 
