@@ -5,6 +5,7 @@
 package implementations;
 
 import java.util.EmptyStackException;
+import java.util.NoSuchElementException;
 import utilities.Iterator;
 import utilities.StackADT;
 
@@ -13,70 +14,157 @@ import utilities.StackADT;
  * @author tienp
  */
 public class MyStack<E> implements StackADT<E>{
+    private MyArrayList<E> arrayData;
+    private int size;
 
+    
+    public MyStack() {
+        arrayData = new MyArrayList<>();
+        this.size = 0;
+    }
+    
     @Override
     public void push(E toAdd) throws NullPointerException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(toAdd == null){
+            throw new NullPointerException();
+        }
+        arrayData.add(toAdd);
+        size++;
     }
 
     @Override
     public E pop() throws EmptyStackException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        
+        if(size == 0){
+            throw new EmptyStackException();
+        }
+        E currentElement = arrayData.get(size-1);
+        arrayData.remove(size - 1);
+        size--;
+        return currentElement;
     }
 
     @Override
     public E peek() throws EmptyStackException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(size == 0){
+            throw new EmptyStackException();
+        }
+        return arrayData.get(size - 1);
     }
 
     @Override
     public void clear() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        arrayData.clear();
     }
 
     @Override
     public boolean isEmpty() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return arrayData.isEmpty();
     }
 
     @Override
     public Object[] toArray() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Object[] newArrayObjects = new Object[size];
+        for (int i = 0; i < size; i++) {
+            newArrayObjects[i] = arrayData.get(size - 1 - i); 
+        }
+        return newArrayObjects;
     }
 
     @Override
     public E[] toArray(E[] holder) throws NullPointerException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(holder == null){
+            throw new NullPointerException();
+        }
+        
+        if(holder.length < size){
+            holder = (E[]) new Object[size];
+        }
+        for(int i = 0; i < size; i++){
+            holder[i] = arrayData.get( size - 1 -i);
+        }
+        
+        return holder;
     }
 
     @Override
     public boolean contains(E toFind) throws NullPointerException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (toFind == null) {
+            throw new NullPointerException();
+        }
+        
+        return arrayData.contains(toFind);
     }
 
     @Override
     public int search(E toFind) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        for(int i = size -1; i >= 0; i--){
+            if (arrayData.get(i).equals(toFind)) {
+                return size - i;
+            }
+        }
+        return -1;
     }
 
     @Override
     public Iterator<E> iterator() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return new StackIterator();
     }
 
     @Override
     public boolean equals(StackADT<E> that) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if(this.size() != that.size()){
+            return false;
+        }
+        Iterator<E> thisIterator = this.iterator();
+        Iterator<E> thatIterator = that.iterator();
+        
+        while(thisIterator.hasNext() && thatIterator.hasNext()){
+            if(!thisIterator.next().equals(thatIterator.next())){
+                return false;
+            }
+            
+        }
+        return true;
     }
 
     @Override
     public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return arrayData.size();
     }
 
     @Override
     public boolean stackOverflow() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        int maxCapacity = 10;
+        return arrayData.size() == maxCapacity;
     }
+    
+    
+
+    public class StackIterator implements Iterator<E> {
+        private int Index = size - 1;
+        
+        public StackIterator() {
+
+        }
+        
+        
+        @Override
+        public boolean hasNext() {
+            return Index >= 0;
+        }
+
+        @Override
+        public E next() throws NoSuchElementException {
+            if(!hasNext()){
+                throw new NoSuchElementException();
+            }
+            return arrayData.get(Index--);
+        }
+        
+        
+        
+        
+}
     
 }
