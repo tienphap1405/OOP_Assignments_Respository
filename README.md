@@ -1,16 +1,27 @@
-**Requirements:**
-The program is not generic and can only be executed based on shapes.
+XML Parser
+==========
+DESC: This XML parser testing the provided XML files with Stack and Queue data structure to read and identified the errors and identified different types of XML for further implementation. 
 
 
-	**Steps to use the Sorting Program:**
-		- Using Netbeans will auto compiled all the .java files and create the .jar file in the dist folders.
-		  Navigate to the root directory and open the terminal
-		  Input the following command line: java -jar .\dist\Sort.jar -sb -tv -f"shapes1.txt"
+Usage Instructions
+------------------
+1. **Running the Program:**
+   - Use the following command to run the program in the terminal:
+     ```
+     java  -jar jar_file_path  xml_file_path
+     ```
+   - The program expects a path to an XML file as an argument. For example:
+     ```
+     java -jar Parser.jar sample2.xml
+     ```
 
-	**Arguments to input:**
-	        -f”..”: Input the file name that will be executed with sorting algorithms.
-	        -s.. (b: Bubble Sort, s: Selection Sort, i: Insertion Sort, m: Merge Sort, q: Quick Sort, z: Cycle Sort) with no spaces, can be upper or lower cases.
-	        -t.. (h: Sorting by height, v: Sorting by Volumes, a: Sorting by Based Area) with no spaces, can be upper or lower cases.
-		Ex: 	java -jar .\dist\Sort.jar -sm -th -f"shapes1.txt"
-			java -jar .\dist\Sort.jar -ss -f"shapes2.txt" -ta 
-			java -jar .\dist\Sort.jar -f"shapes3.txt" -sq -tv 
+2. **Program Output:**
+   - The program will read the specified XML file and output messages.
+   - Any errors found (e.g., file not found, permission issues) will be displayed in the terminal.
+
+3. **Additional Notes:**
+   - This program does not modify the XML file; it only reads and analyzes its content.
+   - Ensure that the XML file path provided is correct to avoid file not exist error.
+
+
+
