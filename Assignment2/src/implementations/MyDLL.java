@@ -87,7 +87,7 @@ public class MyDLL<E> implements ListADT<E>  {
     @Override
     public boolean add(E toAdd) throws NullPointerException {
         // Always adds to the end of the list (tail)
-        return add(size, toAdd);  
+        return add(size, toAdd);   
     }
 
     @Override
@@ -95,6 +95,7 @@ public class MyDLL<E> implements ListADT<E>  {
         Iterator<? extends E> iterator = toAdd.iterator();
         while (iterator.hasNext()) {
             add(iterator.next());
+            size++;
         }
         return true;
     }
@@ -191,7 +192,7 @@ public class MyDLL<E> implements ListADT<E>  {
         if (index >= size) {
             return null;
         }
-       
+           
         return remove(index);
     }
 

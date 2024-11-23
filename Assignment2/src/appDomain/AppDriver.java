@@ -1,9 +1,9 @@
 
 package appDomain;
 
-import java.io.File;
+import implementations.*;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
+
 
 /**
  *
@@ -11,41 +11,28 @@ import java.util.Scanner;
  */
 public class AppDriver {
     public static void main(String args[]){
+        
+        String XMLSUFFIX = ".xml";
+   
+//        if (!args[0].endsWith(XMLSUFFIX) && args[1] != null) {
+//            System.err.println("Program requires only one argument,please enter an .xml file");
+//            return; 
+//        }
 
-    // Attempting Parser stuff...
-    File file = new File("src\\res\\sample1.xml"); 
-    try {
-        ReadFile(file);
-    }
-    catch (FileNotFoundException e) {
-        System.err.print(e.getMessage());
-    }
-    
-    
-
-
-
+//      String parserPath = args[0];
+        
+        // Attempting Parser stuff...
+        Parser parser = new Parser("sample2.xml"); // parserPath
+        try {
+            parser.parsingXML();
+        }
+        catch (FileNotFoundException e) {
+            System.err.print(e.getMessage());
+        }
 
     }
     
     public static void print(Object message){
         System.out.println(message);
-    }
-    
-    public static void ReadFile(File filePath) throws FileNotFoundException {
-        Scanner sc = new Scanner(filePath);
-        // This is for the first line that isn't a self-closing tag and 
-        // is an exception
-        
-        sc.nextLine();
-        while (sc.hasNextLine()) {
-            String line = sc.nextLine().trim();
-            String[] lines = line.split("<>");
-            for (String eachline: lines) {
-                print(eachline);
-            }
-            
-        }
-    }
-    
+    }       
 }
