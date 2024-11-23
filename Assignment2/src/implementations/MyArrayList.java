@@ -230,9 +230,13 @@ public class MyArrayList<E> implements ListADT<E> {
             }
             return data.get(++index);
         }
-        
-        
-        
-        
-}
+                  
+    }
+    
+    public void printList() {
+        Iterator<E> it = iterator();
+        while (it.hasNext()) {
+            System.out.println(it.next());
+        } 
+    }
 }
