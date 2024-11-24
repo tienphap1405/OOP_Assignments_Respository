@@ -18,6 +18,10 @@ public class AppDriver {
 
         // Use the provided XML file path
         String parserPath = args[0];
+        
+        // Display
+        System.out.println("================ERROR LOG===============");
+        
 
         Parser parser = new Parser(parserPath);
         try {

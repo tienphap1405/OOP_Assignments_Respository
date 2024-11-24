@@ -4,14 +4,11 @@ package implementations;
 import exceptions.EmptyQueueException;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.EmptyStackException;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import utilities.Iterator;
 
 /**
- *
+ * The class that manages the parsing process of the .xml file
  * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
  */
 public class Parser {
@@ -21,10 +18,24 @@ public class Parser {
     private MyStack<String> tagStack = new MyStack<>();
     private File file;
     
+    /**
+     * Constructor for a Parser
+     * Stores a File object using the filename entered to then parse later
+     * @param fileName is the name of the .xml file in the res folder
+     */
     public Parser(String fileName) {
         file = new File("src\\res\\" + fileName); 
     }
     
+    /**
+     * The main parsing methodc
+     * It uses a scanner object to read the file stored in the parser
+     * it stores tags created by the processLine() method and then passes each 
+     * one to the tagValidation() method to determine errors which are finally
+     * displayed by the errorLog method if any are found
+     * @throws java.io.FileNotFoundException if the file fails to open or is not found
+     * @throws exceptions.EmptyQueueException if the queues are empty
+     */
     public void parsingXML() throws FileNotFoundException, EmptyQueueException {
         Scanner sc = new Scanner(file);
         MyArrayList<Tag> tags = new MyArrayList<>();
@@ -34,27 +45,30 @@ public class Parser {
             tags.addAll(processLine(sc.nextLine(), lineNumber));
             
             lineNumber++;
-        }  
-        // prints all tags in a line
-        tags.printList();
-        System.out.print("\n\n");
+        }
         
         Iterator<Tag> tagsIterator = tags.iterator();
         while (tagsIterator.hasNext()) {
             Tag currentTag = tagsIterator.next();
-            try {
-                tagValidation(currentTag);
-            } catch (EmptyQueueException | EmptyStackException ex) {
-                Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        ParsingLast();
-        if (errorQueue.isEmpty() && extrasQueue.isEmpty()) {    
-            System.out.println("No errors found");
+            tagValidation(currentTag);
         }
         
+        if (errorQueue.isEmpty() && extrasQueue.isEmpty()) {    
+            System.out.println("No errors found");
+            return;
+        }
+        
+        System.out.print("\n"); 
+        
+        errorLog();   
     }
     
+    /**
+     * Reads through a line in the xml file an returns all found tags within the line
+     * @param line the line being parsed through
+     * @param lineNumber the current line number for error displays
+     * @return an array of tags to later validate
+     */
     public MyArrayList<Tag> processLine(String line, int lineNumber) {
         StringBuilder sb = new StringBuilder();
         MyArrayList<Tag> tagsFound = new MyArrayList<>();
@@ -81,7 +95,6 @@ public class Parser {
                     tagsFound.add(tag);
                     
                     // Reset the StringBuilder to make new tags
-                    
                     sb.setLength(0);
                     foundBeginning = false;
                 } else {
@@ -100,6 +113,15 @@ public class Parser {
         return tagsFound;
     }
     
+    /**
+     * This method checks if the tags are opening, closing or ignorable.
+     * If they are opening tags the are pushed on to the stack, then the last pushed
+     * opening tag is compared to the closing tag and if they are the same there are no
+     * errors, otherwise the tags are checked through to see where the errors are made
+     * and stored in the queues
+     * @param tag the tag that is currently being validated
+     * @throws exceptions.EmptyQueueException if the queue is empty
+     */
     public void tagValidation(Tag tag) throws EmptyQueueException {
         if (tag.canIgnore()) {
             return;
@@ -114,7 +136,6 @@ public class Parser {
             String topOfStack = tagStack.size() > 0 ? tagStack.peek() : null;
             String topOfErrorQueue = errorQueue.size() > 0 ? errorQueue.peek() : null;
             
-            // TODO add size check or peek will blow up (multiple times)
             if (tagName.equals(topOfStack)) {
                 tagStack.pop();
             } else if (tagName.equals(topOfErrorQueue)) {
@@ -136,7 +157,14 @@ public class Parser {
         
     }
     
-    public void ParsingLast() throws EmptyQueueException{
+    /**
+     * This method checks for any errors after the validation process,
+     * it pops and dequeues remaining tags from the stack and queues and displays an
+     * error message for each by calling reportErrors().
+     * This method's algorithm also prevents duplicate errors from being displayed
+     * @throws exceptions.EmptyQueueException if the queue is empty
+     */
+    public void errorLog() throws EmptyQueueException{
         while(!tagStack.isEmpty()){
             errorQueue.enqueue(tagStack.pop());
         }
@@ -149,7 +177,8 @@ public class Parser {
                 String errorTag = errorQueue.peek();
                 String extraTag = extrasQueue.peek();
                 if(!errorTag.equals(extraTag)){
-                    System.err.println("Error queue occurred as confict tag: "+ errorQueue.dequeue());
+                    // ???
+                    printError("Error occurred:\n\t"+ errorQueue.dequeue());
                 }
                 else{
                     errorQueue.dequeue();
@@ -160,18 +189,24 @@ public class Parser {
         }
     }
 
-
+    /**
+     * This method displays the errors for any remaining tags in either queue
+     * @throws exceptions.EmptyQueueException if the queue is empty
+     */
     public void reportErrors() throws EmptyQueueException{
         while(!errorQueue.isEmpty()){
-            System.err.println("Conflicted Error occur in opening tag: "+ errorQueue.dequeue());
+            printError("Conflicting error occurs in opening tag: \n\t"+ errorQueue.dequeue());
             
         }
         while(!extrasQueue.isEmpty()){
-            System.err.println("Conflicted Error occur in closing tag: "+ extrasQueue.dequeue());
+            printError("Conflicting error occurs in closing tag: \n\t"+ extrasQueue.dequeue());
         }
     }
     
-    
+    /**
+     * Simplifies displaying error messages syntax
+     * @param message that which will be displayed
+     */
     public void printError(Object message){
         System.err.println(message);
     }      
