@@ -12,7 +12,7 @@ Usage Instructions
      ```
    - The program expects a path to an XML file as an argument. For example:
      ```
-     java -jar Parser.jar sample2.xml
+     java -jar .\dist\assignment2.jar sample2.xml
      ```
 
 2. **Program Output:**
