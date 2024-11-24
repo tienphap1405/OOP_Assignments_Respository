@@ -12,7 +12,7 @@ import utilities.Iterator;
 
 /**
  *
- * @author Simon Luna Patiarroy
+ * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
  */
 public class Parser {
     
@@ -25,7 +25,7 @@ public class Parser {
         file = new File("src\\res\\" + fileName); 
     }
     
-    public void parsingXML() throws FileNotFoundException {
+    public void parsingXML() throws FileNotFoundException, EmptyQueueException {
         Scanner sc = new Scanner(file);
         MyArrayList<Tag> tags = new MyArrayList<>();
         
@@ -48,7 +48,8 @@ public class Parser {
                 Logger.getLogger(Parser.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if (errorQueue.isEmpty() && extrasQueue.isEmpty()) {
+        ParsingLast();
+        if (errorQueue.isEmpty() && extrasQueue.isEmpty()) {    
             System.out.println("No errors found");
         }
         
@@ -134,7 +135,43 @@ public class Parser {
         }
         
     }
-        
+    
+    public void ParsingLast() throws EmptyQueueException{
+        while(!tagStack.isEmpty()){
+            errorQueue.enqueue(tagStack.pop());
+        }
+        while(!errorQueue.isEmpty() || !extrasQueue.isEmpty()){
+            if(errorQueue.isEmpty() || extrasQueue.isEmpty()){
+                reportErrors();
+                break;
+            }
+            else{
+                String errorTag = errorQueue.peek();
+                String extraTag = extrasQueue.peek();
+                if(!errorTag.equals(extraTag)){
+                    System.err.println("Error queue occurred as confict tag: "+ errorQueue.dequeue());
+                }
+                else{
+                    errorQueue.dequeue();
+                    extrasQueue.dequeue();
+                }
+            }
+            
+        }
+    }
+
+
+    public void reportErrors() throws EmptyQueueException{
+        while(!errorQueue.isEmpty()){
+            System.err.println("Conflicted Error occur in opening tag: "+ errorQueue.dequeue());
+            
+        }
+        while(!extrasQueue.isEmpty()){
+            System.err.println("Conflicted Error occur in closing tag: "+ extrasQueue.dequeue());
+        }
+    }
+    
+    
     public void printError(Object message){
         System.err.println(message);
     }      
