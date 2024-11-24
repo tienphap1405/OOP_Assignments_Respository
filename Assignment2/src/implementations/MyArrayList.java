@@ -291,7 +291,9 @@ public class MyArrayList<E> implements ListADT<E> {
         while (it.hasNext()) {
             System.out.println(it.next());
         } 
-    } 
+    }  
+
+ 
     
     /**
      * Implementation of the array list iterator
@@ -334,6 +336,9 @@ public class MyArrayList<E> implements ListADT<E> {
             return data.get(++index);
         }
         
+        
+        
+              
         
 
         

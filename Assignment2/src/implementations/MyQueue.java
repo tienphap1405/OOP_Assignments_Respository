@@ -14,15 +14,9 @@ import utilities.QueueADT;
  */
 public class MyQueue<E> implements QueueADT<E> {
     
-    /**
-     * Constructs an empty queue with no capacity restrictions.
-     */
-    public MyDLL<E> dLinkedList = new MyDLL<>();
+    private MyDLL<E> dLinkedList = new MyDLL<>();
+    private int capacity = -1;
 
-    /**
-     *
-     */
-    public int capacity = 0;
     
     /**
      * Constructs an empty queue with no capacity restrictions.
@@ -77,7 +71,7 @@ public class MyQueue<E> implements QueueADT<E> {
      */
     @Override
     public E peek() throws EmptyQueueException {
-        if (isEmpty()) {
+        if (this.isEmpty()) {
             throw new EmptyQueueException();
         }
         return dLinkedList.get(0);
@@ -200,7 +194,7 @@ public class MyQueue<E> implements QueueADT<E> {
      */
     @Override
     public boolean isFull() {
-        if (capacity == 0) {
+        if (capacity == -1) {
             // capacity 0 will be the default, which means
             // there is no capacity limits
             return false;

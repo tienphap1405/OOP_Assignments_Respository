@@ -138,7 +138,9 @@ public class MyDLL<E> implements ListADT<E>{
         Iterator<? extends E> iterator = toAdd.iterator();
         while (iterator.hasNext()) {
             add(iterator.next());
+            size++;
         }
+        
         return true;
     }
 
