@@ -132,24 +132,26 @@ public class Parser {
         } else {
             
             Tag topOfStack = tagStack.size() > 0 ? tagStack.peek() : null;
+            Tag topOfErrorQueue = errorQueue.size() > 0 ? errorQueue.peek() : null;
             
+            // This algorithm was made using Kitty's Algorithm
             if (tag.equals(topOfStack)) {
                 tagStack.pop();   
+            } else if (tag.equals(topOfErrorQueue)) { 
+                return; // ignore the current tag, as dequeueing it from errorQueue 
+                        //as in the algorithm will mean that it is not reported later
             } else if (tagStack.isEmpty()) {
                 errorQueue.enqueue(tag);
-            } else {
-                if (tagStack.contains(tag)) {
-                    while (!tag.equals(topOfStack) && tagStack.size() > 0) { 
-                        errorQueue.enqueue(tagStack.pop());
-                        topOfStack = tagStack.size() > 0 ? tagStack.peek() : null;
-                    }
-                    tagStack.pop();
-                } else {
-                    extrasQueue.enqueue(tag);
+            } else if (tagStack.contains(tag)) {
+                while (!tag.equals(topOfStack) && tagStack.size() > 0) { 
+                    errorQueue.enqueue(tagStack.pop());
+                    topOfStack = tagStack.size() > 0 ? tagStack.peek() : null;
                 }
-            }
-        }
-        
+                    tagStack.pop();
+            } else {
+                extrasQueue.enqueue(tag);
+            }   
+        }   
     }
     
     /**
