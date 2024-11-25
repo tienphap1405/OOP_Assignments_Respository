@@ -30,8 +30,4 @@ public class AppDriver {
             System.err.println("File not found: " + e.getMessage());
         }
     }
-
-    public static void print(Object message) {
-        System.out.println(message);
-    }       
 }
