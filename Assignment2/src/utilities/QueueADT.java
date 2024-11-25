@@ -8,6 +8,7 @@ import java.io.*;
  * (CRPG 304) at the SAIT Polytechnic. This Queue embodies all the standard
  * Queue operations, and includes several helper methods that will give the data
  * structure more flexibility and use.
+ * @param <E> type of element
  */
 public interface QueueADT<E> extends Serializable
 {

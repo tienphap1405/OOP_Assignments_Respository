@@ -1,11 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package implementations;
 
 /**
- *
+ * Tab objects contain all the necessary details of a tag such as its name
+ * the line number the tag was found and if its an opening tag or closing tag
  * @author Simon Luna Patiarroy, Tien Phap (Evan) Nguyen
  */
 public class Tag {
