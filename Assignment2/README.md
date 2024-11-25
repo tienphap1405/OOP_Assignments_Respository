@@ -23,6 +23,6 @@ DESC: This XML parser testing the provided XML files with Stack and Queue data s
 
 3. **Additional Notes:**
    - This program does not modify the XML file; it only reads and analyzes its content.
-   - Ensure that the XML file path provided is correct to avoid file not exist error.
+   - The XML file **MUST** be in the res directory in the project to avoid errors.
 
 Huge thanks to Jose Luna (Simon’s brother) for helping the team in some parts of the parser logic.
