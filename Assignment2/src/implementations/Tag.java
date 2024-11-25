@@ -10,6 +10,8 @@ package implementations;
  */
 public class Tag {
     private String name;
+    private String completeTag;
+    private int lineNumber;
     private boolean isOpening;
     private boolean canIgnore = false;
     
@@ -19,9 +21,11 @@ public class Tag {
      * Determines if it is ignorable based on if its a self closing tag or a processing tag
      * Determines the name of the tag with the first word inside the tag structure
      * @param content the text inside a tag 
+     * @param lineNumber the line number in which the tag was found
      */
-    public Tag(String content) {
-        
+    public Tag(String content, int lineNumber) {
+        this.completeTag = "<" + content + ">";
+        this.lineNumber = lineNumber;
         isOpening = !content.startsWith("/");
         canIgnore = content.endsWith("/") || content.startsWith("?");
         
@@ -59,20 +63,45 @@ public class Tag {
     }
     
     /**
-     * Returns all the details of the tag to be easily displayed in the console
-     * @return a formatted string that displays the tags attributes
+     * Return the line number at which the tag was found
+     * @return the line number at which the tag was found
      */
-    @Override 
-    public String toString() {
-        String openOrClosed = isOpening ? "Open" : "Close";
-        
-        if (canIgnore) {
-            return "Ignored";
+    public int getLineNumber() {
+        return lineNumber;
+    }
+    
+    /**
+     * Return the tag without any changes
+     * @return the full tag without changes to display to the user
+     */
+    public String getCompleteTag() {
+        return completeTag;
+    }
+
+    /**
+     * Determines if the Tags are equal based on their names only
+     * @param object to compare to this tag
+     * @return true if the Tag names are the same or false otherwise
+     */
+    @Override
+    public boolean equals(Object object) {
+        // Check if its a reference
+        if (this == object) {
+            return true;
         }
         
-        String formatString = "Name:" + this.name  
-                + " | Opening/Closing: " + openOrClosed;
-        return formatString;
+        // Checking its the same class to then cast.
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+
+        Tag other = (Tag)object;
+        return name.equals(other.name);
+    }
+    
+    @Override
+    public String toString() {
+        return this.completeTag;
     }
     
 }

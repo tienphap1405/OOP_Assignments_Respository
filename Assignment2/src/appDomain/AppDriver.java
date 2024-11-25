@@ -10,14 +10,14 @@ import java.io.FileNotFoundException;
  */
 public class AppDriver {
     public static void main(String args[]) throws EmptyQueueException {
-        String XMLSUFFIX = ".xml";
-        if (args.length != 1 || !args[0].endsWith(XMLSUFFIX)) {
-            System.err.println("Program requires only one argument, please enter an .xml file");
-            return; 
-        }
+//        String XMLSUFFIX = ".xml";
+//        if (args.length != 1 || !args[0].endsWith(XMLSUFFIX)) {
+//            System.err.println("Program requires only one argument, please enter an .xml file");
+//            return; 
+//        }
 
         // Use the provided XML file path
-        String parserPath = args[0];
+        String parserPath = "sample2.xml";
         
         // Display
         System.out.println("================ERROR LOG===============");

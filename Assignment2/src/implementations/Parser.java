@@ -13,9 +13,9 @@ import utilities.Iterator;
  */
 public class Parser {
     
-    private MyQueue<String> errorQueue = new MyQueue<>();
-    private MyQueue<String> extrasQueue = new MyQueue<>();
-    private MyStack<String> tagStack = new MyStack<>();
+    private MyQueue<Tag> errorQueue = new MyQueue<>();
+    private MyQueue<Tag> extrasQueue = new MyQueue<>();
+    private MyStack<Tag> tagStack = new MyStack<>();
     private File file;
     
     /**
@@ -83,7 +83,7 @@ public class Parser {
                 if (!foundBeginning){
                     foundBeginning = true;
                 } else {
-                 printError("Invalid opening tag at line " + lineNumber);
+                 printError("Invalid opening tag at line " + lineNumber + ":");
                  printError(line);
                 }
                 continue;
@@ -91,14 +91,14 @@ public class Parser {
 
             if (character == '>') {
                 if (foundBeginning){
-                    Tag tag = new Tag(sb.toString());
+                    Tag tag = new Tag(sb.toString(), lineNumber);
                     tagsFound.add(tag);
                     
                     // Reset the StringBuilder to make new tags
                     sb.setLength(0);
                     foundBeginning = false;
                 } else {
-                 printError("Invalid close tag at line " + lineNumber);
+                 printError("Invalid close tag at line " + lineNumber + ":");
                  printError(line);
                 }
                 continue;
@@ -127,30 +127,26 @@ public class Parser {
             return;
         }
         
-        String tagName = tag.getName();
-        
         if (tag.isOpening()) {
-           this.tagStack.push(tagName);
+           this.tagStack.push(tag);
         } else {
             
-            String topOfStack = tagStack.size() > 0 ? tagStack.peek() : null;
-            String topOfErrorQueue = errorQueue.size() > 0 ? errorQueue.peek() : null;
+            Tag topOfStack = tagStack.size() > 0 ? tagStack.peek() : null;
+            Tag topOfErrorQueue = errorQueue.size() > 0 ? errorQueue.peek() : null;
             
-            if (tagName.equals(topOfStack)) {
-                tagStack.pop();
-            } else if (tagName.equals(topOfErrorQueue)) {
-                errorQueue.dequeue();   
+            if (tag.equals(topOfStack)) {
+                tagStack.pop();   
             } else if (tagStack.isEmpty()) {
-                errorQueue.enqueue(tagName);
+                errorQueue.enqueue(tag);
             } else {
-                if (tagStack.contains(tagName)) {
-                    while (!tagName.equals(topOfStack) && tagStack.size() > 0) { 
+                if (tagStack.contains(tag)) {
+                    while (!tag.equals(topOfStack) && tagStack.size() > 0) { 
                         errorQueue.enqueue(tagStack.pop());
                         topOfStack = tagStack.size() > 0 ? tagStack.peek() : null;
                     }
                     tagStack.pop();
                 } else {
-                    extrasQueue.enqueue(tagName);
+                    extrasQueue.enqueue(tag);
                 }
             }
         }
@@ -174,11 +170,11 @@ public class Parser {
                 break;
             }
             else{
-                String errorTag = errorQueue.peek();
-                String extraTag = extrasQueue.peek();
+                Tag errorTag = errorQueue.peek();
+                Tag extraTag = extrasQueue.peek();
                 if(!errorTag.equals(extraTag)){
-                    // ???
-                    printError("Error occurred:\n\t"+ errorQueue.dequeue());
+                    Tag error = errorQueue.dequeue();
+                    printError("Error at line " + error.getLineNumber() + ": \n\t"+ error.getCompleteTag());
                 }
                 else{
                     errorQueue.dequeue();
@@ -195,11 +191,13 @@ public class Parser {
      */
     public void reportErrors() throws EmptyQueueException{
         while(!errorQueue.isEmpty()){
-            printError("Conflicting error occurs in opening tag: \n\t"+ errorQueue.dequeue());
+            Tag error = errorQueue.dequeue();
+            printError("Error at line " + error.getLineNumber() + ": \n\t"+ error.getCompleteTag());
             
         }
         while(!extrasQueue.isEmpty()){
-            printError("Conflicting error occurs in closing tag: \n\t"+ extrasQueue.dequeue());
+            Tag extra = extrasQueue.dequeue();
+            printError("Error at line " + extra.getLineNumber() + ": \n\t"+ extra.getCompleteTag());
         }
     }
     

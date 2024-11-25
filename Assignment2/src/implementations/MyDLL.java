@@ -8,7 +8,7 @@ import utilities.Iterator;
 import utilities.ListADT;
 /**
  *
- * @author roman
+ *
  * The implementation of the Double linked list
  * @author Simon Luna Patiarroy, Tien Phap (Evan) Nguyen
  * @param <E> element type
@@ -421,7 +421,7 @@ public class MyDLL<E> implements ListADT<E>{
     // Additional Testing Method
 
     /**
-     *
+     * Displays the contents of the linked list
      */
     public void printList() {
         MyDLLNode<E> temp = head;
