@@ -99,9 +99,4 @@ public class Tag {
         return name.equals(other.name);
     }
     
-    @Override
-    public String toString() {
-        return this.completeTag;
-    }
-    
 }

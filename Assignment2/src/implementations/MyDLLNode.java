@@ -69,6 +69,4 @@ public class MyDLLNode<E>
     public void setPrev(MyDLLNode<E> prev) {
         this.prev = prev;
     }
-        
-
 }

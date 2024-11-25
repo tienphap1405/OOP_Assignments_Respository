@@ -132,7 +132,6 @@ public class Parser {
         } else {
             
             Tag topOfStack = tagStack.size() > 0 ? tagStack.peek() : null;
-            Tag topOfErrorQueue = errorQueue.size() > 0 ? errorQueue.peek() : null;
             
             if (tag.equals(topOfStack)) {
                 tagStack.pop();   
@@ -207,6 +206,5 @@ public class Parser {
      */
     public void printError(Object message){
         System.err.println(message);
-    }      
-    
+    }          
 }

@@ -334,13 +334,6 @@ public class MyArrayList<E> implements ListADT<E> {
                 throw new NoSuchElementException();
             }
             return data.get(++index);
-        }
-        
-        
-        
-              
-        
-
-        
-}
+        }    
+    }
 }

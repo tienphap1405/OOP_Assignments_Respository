@@ -1,10 +1,8 @@
 
 package implementations;
 
-import com.sun.source.tree.BreakTree;
 import exceptions.EmptyQueueException;
 import utilities.Iterator;
-import utilities.ListADT;
 import utilities.QueueADT;
 
 /**

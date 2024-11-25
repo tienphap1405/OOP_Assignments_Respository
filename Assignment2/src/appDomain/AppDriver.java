@@ -5,7 +5,8 @@ import implementations.*;
 import java.io.FileNotFoundException;
 
 /**
- * Main class
+ * Main class that receives input from the user and uses it to create a Parser
+ * object that does all of the parsing functionality
  * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
  */
 public class AppDriver {
