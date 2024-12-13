@@ -41,6 +41,7 @@ public class WordTracker {
     
     public void processLine(String line, int lineNumber, String fileName) {
         StringBuilder sb = new StringBuilder();
+        System.out.println(line);
         
         boolean foundStartOfWord = false;
 
@@ -71,7 +72,7 @@ public class WordTracker {
             }
             
             // if there is a word at the end of a line with no punctuation afterwards
-            if (!sb.isEmpty() && character == line.charAt(line.length() - 1)) {
+            if (!sb.isEmpty() && i == line.length() - 1) {
                 buildWord(sb.toString(), lineNumber, fileName);
                 sb.setLength(0);
                 foundStartOfWord = false;
