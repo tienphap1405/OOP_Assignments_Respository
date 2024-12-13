@@ -1,4 +1,5 @@
 package implementations;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -6,7 +7,7 @@ import java.util.HashMap;
  *
  * @author roman
  */
-public class Word implements Comparable<Word> {
+public class Word implements Comparable<Word>, Serializable {
     
     private String word;
     private int numberOfApperances;
