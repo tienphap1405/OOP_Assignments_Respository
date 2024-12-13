@@ -20,12 +20,11 @@ public class Word implements Comparable<Word>, Serializable {
         
         // Hashmap Implementation
         fileDictionary.put(filename, lineNumbersList);
-        
         this.numberOfApperances = 1;
-        this.word = stripPunctuation(word);
+        this.word = word;
     }
     
-    public final String stripPunctuation(String word) {
+    public String stripPunctuation(String word) {
         if (word.equals("\'em")) {
             return word;
         }
@@ -53,23 +52,26 @@ public class Word implements Comparable<Word>, Serializable {
         return fileDictionary;
     }
     
-    public void updateForDuplicates(Integer newLineNumber, String newFileName) {
+    public void updateForDuplicates(Integer newLineNumber, String fileName) {
         
-        // Hash Map Implementation
-        if (fileDictionary.containsKey(newFileName)) {
-            ArrayList<Integer> oldNumbers = fileDictionary.get(newFileName);
+        if (fileDictionary.containsKey(fileName)) {
+            ArrayList<Integer> oldNumbers = fileDictionary.get(fileName);
             oldNumbers.add(newLineNumber);
-            fileDictionary.put(newFileName, oldNumbers);
+            fileDictionary.put(fileName, oldNumbers);
         } else {
             ArrayList<Integer> newNumbers = new ArrayList<>();
             newNumbers.add(newLineNumber);
-            fileDictionary.put(newFileName, newNumbers);
+            fileDictionary.put(fileName, newNumbers);
         }
         
         this.numberOfApperances = numberOfApperances + 1;
     }
     
-    public String displayKey() {
+    // Bellow are all methods to make sense of the formatting needed to be displayed
+    //
+    //
+    @Override
+    public String toString() {
         return "Key : ===" + this.word + "=== ";
     }
     
@@ -83,14 +85,14 @@ public class Word implements Comparable<Word>, Serializable {
             String foundFileString = "found in file(s): " + key + ", ";
             completeString += foundFileString;
         }
-        
+
         return completeString;
     }
     
     public String displayFilesAndLines() {
         String completeString = "";
         for (String key : fileDictionary.keySet()) {
-            String foundFileString = "found in file(s): " + key + " on line(s): ";
+            String foundFileString = "found in file: " + key + " on line(s): ";
             completeString += foundFileString;
             
             ArrayList<Integer> linesFound = fileDictionary.get(key);
@@ -102,12 +104,22 @@ public class Word implements Comparable<Word>, Serializable {
         return completeString;
     }
     
-    // Default toString is going to be in -po format
-    @Override
-    public String toString() {
-        return displayKey() + displayNumberOfEntries() + displayFilesAndLines();
+    // -pf format
+    public String displayPF() {
+        return toString() + displayFiles();
     }
-   
+    
+    // -pl format
+    public String displayPL() {
+        return toString() + displayFilesAndLines();
+    }
+    
+    // -po format
+    public String displayPO() {
+        return toString() + displayNumberOfEntries() + displayFilesAndLines();
+    }
+    
+    // comparison ignores capitalization as per the assignment output
     @Override
     public int compareTo(Word other) {
         if (this.word.toLowerCase().compareTo(other.word.toLowerCase()) == 0) {

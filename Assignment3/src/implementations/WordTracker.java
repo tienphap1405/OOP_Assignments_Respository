@@ -1,5 +1,4 @@
 package implementations;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -7,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintStream;
 import java.io.Serializable;
 import java.util.Scanner;
 import utilities.Iterator;
@@ -16,25 +16,26 @@ import utilities.Iterator;
  * @author roman
  */
 public class WordTracker implements Serializable{
-    private String REPOSITORY_FILE = "repository.ser";
-    private BSTree<Word> bst;
+    private final String REPOSITORY_FILE = "repository.ser";
+    private BSTree<Word> bsTree;
     private String fileName;
     private File file;
-    // restructure previous tree - file path here
+    private PrintStream ps = null;
     
-    public WordTracker(String fileName) {
+    public WordTracker(String fileName, PrintStream ps) {
         this.fileName = fileName;
         this.file = new File("src/res/" + fileName);
+        this.ps = ps;
 
         try {
-            this.bst = treeDeserialization();
+            this.bsTree = treeDeserialization();
         } catch (IOException | ClassNotFoundException e) {
             System.err.println("Error loading repository: " + e.getMessage());
-            this.bst = new BSTree<>(); // Initialize a new tree on failure
+            this.bsTree = new BSTree<>(); // Initialize a new tree on failure
         }
     }
     
-    public void readingTextFile() throws FileNotFoundException {
+    public void readingTextFile(String displayOption) throws FileNotFoundException {
         Scanner sc = new Scanner(file);
         
         int lineNumber = 1;
@@ -43,12 +44,7 @@ public class WordTracker implements Serializable{
             lineNumber++;
         }
         
-        Iterator<Word> it = bst.inorderIterator();
-        while (it.hasNext()){
-            Word currentWord = it.next();
-            System.out.println(currentWord);
-        }
-        
+        displayResults(displayOption);
         
         System.out.print("\n");   
     }
@@ -70,9 +66,28 @@ public class WordTracker implements Serializable{
 
             if (!Character.isLetter(character) && character != '\''){
                 if (foundStartOfWord){
+                    boolean specialCase = false;
+                    String word = sb.toString();
                     
-                    buildWord(sb.toString(), lineNumber, fileName);
                     
+                    if (word.equals("\'em")) {
+                        specialCase = true;
+                    }
+                    
+                    if (!specialCase) {
+                        if (word.endsWith("\'")) {
+                            word = word.substring(0,word.length() - 1);
+                        }
+
+                        if (word.startsWith("\'")) {
+                            word = word.substring(1);
+                        }
+                    }
+                    
+                    if (!word.isBlank()) {
+                        buildWord(word, lineNumber, fileName);
+                    }
+                       
                     // Reset the StringBuilder to make new word
                     sb.setLength(0);
                     foundStartOfWord = false;
@@ -98,10 +113,10 @@ public class WordTracker implements Serializable{
         Word newWord = new Word(contents, lineNumber, fileName);
                    
         // bst.add only returns false if it failed to add due to duplication
-        boolean isDuplicated = !bst.add(newWord);
+        boolean isDuplicated = !bsTree.add(newWord);
 
         if (isDuplicated) {
-            Word previousInstance = bst.search(newWord).getElement();
+            Word previousInstance = bsTree.search(newWord).getElement();
             previousInstance.updateForDuplicates(lineNumber, fileName);
         }   
     }
@@ -109,8 +124,8 @@ public class WordTracker implements Serializable{
     
     public void treeSerialization() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(REPOSITORY_FILE))) {
-            oos.writeObject(bst);
-            System.out.println("BSTree serialized successfully. Size: " + bst.size());
+            oos.writeObject(bsTree);
+            System.out.println("BSTree serialized successfully. Size: " + bsTree.size());
         } catch (IOException e) {
             System.err.println("Serialization failed: " + e.getMessage());
         }
@@ -119,14 +134,14 @@ public class WordTracker implements Serializable{
     
     
     private BSTree<Word> treeDeserialization() throws IOException, ClassNotFoundException {
-        File file = new File(REPOSITORY_FILE);
+        File repoFile = new File(REPOSITORY_FILE);
 
-        if (!file.exists()) {
+        if (!repoFile.exists()) {
             System.out.println("No repository found. Starting with a new BSTree.");
             return new BSTree<>();
         }
 
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(repoFile))) {
             BSTree<Word> loadedTree = (BSTree<Word>) ois.readObject();
             System.out.println("Repository loaded successfully. Tree size: " + loadedTree.size());
             return loadedTree;
@@ -134,6 +149,44 @@ public class WordTracker implements Serializable{
             System.err.println("Deserialization failed: " + e.getMessage());
             return new BSTree<>();
         }
+    }
+    
+    public void displayResults(String displayOption) {
+        Iterator<Word> it = bsTree.inorderIterator();
+        
+        printToBoth("Writing " + displayOption.substring(1) + " format");
+        while (it.hasNext()){
+            Word currentWord = it.next();
+            
+            switch (displayOption) {
+                case "-pl" -> {
+                    printToBoth(currentWord.displayPL());
+                }
+                case "-pf" -> {
+                    printToBoth(currentWord.displayPF());
+                }
+                case "-po" -> {
+                    printToBoth(currentWord.displayPO());
+                }
+                default -> System.err.println("error!!"); 
+            }
+            
+        }
+        if (ps != null) {
+            ps.close();   
+        } 
+    }
+    
+    public void printToBoth(String content) {
+        System.out.println(content);
+        if (ps != null){
+            PrintStream original = System.out;
+            
+            System.setOut(ps);
+            ps.println(content);
+            
+            System.setOut(original);
+        }  
     }
    
     
