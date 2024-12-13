@@ -1,12 +1,14 @@
 
 package implementations;
 
+import java.io.Serializable;
+
 /**
  * The class indicates the implementation of Node structure of the Binary Search Tree 
  * @author tienp
  * @param <E> Generic Data type of the element object
  */
-public class BSTreeNode<E extends Comparable<? super E>> implements Comparable<BSTreeNode<E>> {
+public class BSTreeNode<E extends Comparable<? super E>> implements Comparable<BSTreeNode<E>>, Serializable {
     private E element;
     private BSTreeNode left;
     private BSTreeNode right;

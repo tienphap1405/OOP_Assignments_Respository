@@ -1,33 +1,34 @@
 package appDomain;
 
-import implementations.*;
+import implementations.WordTracker;
+import implementations.Word;
 import java.io.FileNotFoundException;
 
-/**
- * Main class that receives input from the user and uses it to create a Parser
- * object that does all of the parsing functionality
- * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
- */
+import java.io.IOException;
+
 public class AppDriver {
-    public static void main(String args[]) {
-//        String XMLSUFFIX = ".xml";
-//        if (args.length != 1 || !args[0].endsWith(XMLSUFFIX)) {
-//            System.err.println("Program requires only one argument, please enter an .xml file");
-//            return; 
-//        }
+    public static void main(String[] args) {
+        String testFileName = "simpleTest.txt";
 
-        // Use the provided XML file path
-        // String parserPath = args[0];
-        
-        // Display
-        //System.out.println("================ERROR LOG===============");
-        
-
-        WordTracker wordTracker = new WordTracker("simpleTest.txt");
         try {
+            WordTracker wordTracker = new WordTracker(testFileName);
+
+            System.out.println("Reading and processing the file...");
             wordTracker.readingTextFile();
+
+            System.out.println("Serializing the tree...");
+            wordTracker.treeSerialization();
+
+            System.out.println("Testing deserialization...");
+            WordTracker deserializedTracker = new WordTracker(testFileName);
+
+            System.out.println("Contents of the BST after deserialization:");
+            deserializedTracker.readingTextFile();
+
         } catch (FileNotFoundException e) {
-            System.err.println("File not found: " + e.getMessage());
+            System.err.println("Test file not found: " + e.getMessage());
+        } catch (Exception e) {
+            System.err.println("An error occurred: " + e.getMessage());
         }
     }
 }

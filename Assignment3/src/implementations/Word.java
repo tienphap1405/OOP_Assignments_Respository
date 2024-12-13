@@ -1,11 +1,12 @@
 package implementations;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author roman
  */
-public class Word implements Comparable<Word> {
+public class Word implements Comparable<Word>, Serializable {
     
     private String word;
     private ArrayList<Integer> lineNumbers= new ArrayList<>();
