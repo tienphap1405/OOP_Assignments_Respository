@@ -33,7 +33,6 @@ public class WordTracker {
     
     public void processLine(String line, int lineNumber, String fileName) {
         StringBuilder sb = new StringBuilder();
-        // ArrayList<Word> wordsFound = new ArrayList<>();
         
         boolean foundStartOfWord = false;
 
@@ -41,16 +40,21 @@ public class WordTracker {
         for (int i = 0; i < line.length(); i++) {
             char character = line.charAt(i);
 
-            if (character != ' ') {
+            if (Character.isLetter(character)) {
                 if (!foundStartOfWord) {
                     foundStartOfWord = true;
                 }
             }
 
-            if (character == ' ') {
+            if (!Character.isLetter(character) && character != '\''){
                 if (foundStartOfWord){
                     // Build word
                     Word newWord = new Word(sb.toString(), lineNumber, fileName);
+                    
+                    // Tree logic happens here
+                    // Tree logic happens here
+                    // Tree logic happens here
+                    // Tree logic happens here
                     // Tree logic happens here
                     System.out.println(newWord);
                     
