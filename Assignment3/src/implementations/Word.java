@@ -1,6 +1,7 @@
 package implementations;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -9,15 +10,18 @@ import java.util.ArrayList;
 public class Word implements Comparable<Word>, Serializable {
     
     private String word;
-    private ArrayList<Integer> lineNumbers= new ArrayList<>();
-    private ArrayList<String> fileNames = new ArrayList<>();
     private int numberOfApperances;
+    private HashMap<String, ArrayList<Integer>> fileDictionary = new HashMap<>(); 
     
     public Word(String word, int lineNumber, String filename) { 
-        lineNumbers.add(lineNumber);
-        fileNames.add(filename);
+        
+        ArrayList<Integer> lineNumbersList = new ArrayList<>();
+        lineNumbersList.add(lineNumber);
+        
+        // Hashmap Implementation
+        fileDictionary.put(filename, lineNumbersList);
+        
         this.numberOfApperances = 1;
-           
         this.word = stripPunctuation(word);
     }
     
@@ -40,42 +44,75 @@ public class Word implements Comparable<Word>, Serializable {
     public String getWord() {
         return word;
     }
-
-    public ArrayList<Integer> getLine() {
-        return lineNumbers;
-    }
-
-    public ArrayList<String> getFilename() {
-        return fileNames;
-    }
     
     public int getNumberOfApperances() {
         return numberOfApperances;
     }
+     
+    public HashMap<String, ArrayList<Integer>> getDictionary() {
+        return fileDictionary;
+    }
     
     public void updateForDuplicates(Integer newLineNumber, String newFileName) {
         
-        if (!this.lineNumbers.contains(newLineNumber)) {
-            this.lineNumbers.add(newLineNumber);
-        }
-        
-        if (!this.fileNames.contains(newFileName)) {
-            this.fileNames.add(newFileName);
+        // Hash Map Implementation
+        if (fileDictionary.containsKey(newFileName)) {
+            ArrayList<Integer> oldNumbers = fileDictionary.get(newFileName);
+            oldNumbers.add(newLineNumber);
+            fileDictionary.put(newFileName, oldNumbers);
+        } else {
+            ArrayList<Integer> newNumbers = new ArrayList<>();
+            newNumbers.add(newLineNumber);
+            fileDictionary.put(newFileName, newNumbers);
         }
         
         this.numberOfApperances = numberOfApperances + 1;
     }
-
+    
+    public String displayKey() {
+        return "Key : ===" + this.word + "=== ";
+    }
+    
+    public String displayNumberOfEntries() {
+        return "number of entries: " + this.numberOfApperances + " ";
+    }
+    
+    public String displayFiles() {
+        String completeString = "";
+        for (String key : fileDictionary.keySet()) {
+            String foundFileString = "found in file(s): " + key + ", ";
+            completeString += foundFileString;
+        }
+        
+        return completeString;
+    }
+    
+    public String displayFilesAndLines() {
+        String completeString = "";
+        for (String key : fileDictionary.keySet()) {
+            String foundFileString = "found in file(s): " + key + " on line(s): ";
+            completeString += foundFileString;
+            
+            ArrayList<Integer> linesFound = fileDictionary.get(key);
+            for (Integer line : linesFound) {
+                completeString += line + ", ";
+            }            
+        }
+        
+        return completeString;
+    }
+    
+    // Default toString is going to be in -po format
     @Override
     public String toString() {
-        return "Word{" + "word=" + word + ", lineNumbers=" + lineNumbers + ", filenames=" + fileNames + ", numberOfApperances=" + numberOfApperances + '}';
+        return displayKey() + displayNumberOfEntries() + displayFilesAndLines();
     }
-
+   
     @Override
     public int compareTo(Word other) {
-        if (this.word.compareTo(other.word) == 0) {
+        if (this.word.toLowerCase().compareTo(other.word.toLowerCase()) == 0) {
             return 0;
-        } else if (this.word.compareTo(other.word) < 0) {
+        } else if (this.word.toLowerCase().compareTo(other.word.toLowerCase()) < 0) {
             return -1;
         } else {
             return 1;

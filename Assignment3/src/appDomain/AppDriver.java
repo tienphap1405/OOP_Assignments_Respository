@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class AppDriver {
+
     public static void main(String[] args) {
         String testFileName = "simpleTest.txt";
 
@@ -30,5 +31,6 @@ public class AppDriver {
         } catch (Exception e) {
             System.err.println("An error occurred: " + e.getMessage());
         }
+        
     }
 }
