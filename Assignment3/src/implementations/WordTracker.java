@@ -3,6 +3,7 @@ package implementations;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import utilities.Iterator;
 
 /**
  *
@@ -13,6 +14,7 @@ public class WordTracker {
     private BSTree<Word> bst = new BSTree<>();
     private String fileName;
     private File file;
+    // restructure previous tree - file path here
 
     public WordTracker(String fileName) {
         this.fileName = fileName;
@@ -28,6 +30,12 @@ public class WordTracker {
             lineNumber++;
         }
         
+        Iterator<Word> it = bst.inorderIterator();
+        while (it.hasNext()){
+            System.out.println(it.next());
+        }
+        
+        
         System.out.print("\n");   
     }
     
@@ -40,7 +48,7 @@ public class WordTracker {
         for (int i = 0; i < line.length(); i++) {
             char character = line.charAt(i);
 
-            if (Character.isLetter(character)) {
+            if (Character.isLetter(character) || character == '\'') {
                 if (!foundStartOfWord) {
                     foundStartOfWord = true;
                 }
@@ -51,12 +59,7 @@ public class WordTracker {
                     // Build word
                     Word newWord = new Word(sb.toString(), lineNumber, fileName);
                     
-                    // Tree logic happens here
-                    // Tree logic happens here
-                    // Tree logic happens here
-                    // Tree logic happens here
-                    // Tree logic happens here
-                    System.out.println(newWord);
+                    bst.add(newWord);
                     
                     // Reset the StringBuilder to make new word
                     sb.setLength(0);
