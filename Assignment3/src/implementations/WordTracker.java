@@ -56,10 +56,8 @@ public class WordTracker {
 
             if (!Character.isLetter(character) && character != '\''){
                 if (foundStartOfWord){
-                    // Build word
-                    Word newWord = new Word(sb.toString(), lineNumber, fileName);
                     
-                    bst.add(newWord);
+                    buildWord(sb.toString(), lineNumber, fileName);
                     
                     // Reset the StringBuilder to make new word
                     sb.setLength(0);
@@ -71,8 +69,27 @@ public class WordTracker {
             if (foundStartOfWord) {
                 sb.append(character);
             }
+            
+            // if there is a word at the end of a line with no punctuation afterwards
+            if (!sb.isEmpty() && character == line.charAt(line.length() - 1)) {
+                buildWord(sb.toString(), lineNumber, fileName);
+                sb.setLength(0);
+                foundStartOfWord = false;
+            }
 
         }
+    }
+    
+    public void buildWord(String contents, int lineNumber, String fileName) {
+        Word newWord = new Word(contents, lineNumber, fileName);
+                   
+        // bst.add only returns false if it failed to add due to duplication
+        boolean isDuplicated = !bst.add(newWord);
+
+        if (isDuplicated) {
+            Word previousInstance = bst.search(newWord).getElement();
+            previousInstance.updateForDuplicates(lineNumber, fileName);
+        }   
     }
     
     /**

@@ -20,7 +20,7 @@ public class AppDriver {
         // String parserPath = args[0];
         
         // Display
-        System.out.println("================ERROR LOG===============");
+        //System.out.println("================ERROR LOG===============");
         
 
         WordTracker wordTracker = new WordTracker("simpleTest.txt");

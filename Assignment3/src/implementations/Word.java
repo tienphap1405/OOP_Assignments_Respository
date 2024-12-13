@@ -16,10 +16,13 @@ public class Word implements Comparable<Word> {
         lineNumbers.add(lineNumber);
         fileNames.add(filename);
         this.numberOfApperances = 1;
-        
+           
+        this.word = stripPunctuation(word);
+    }
+    
+    public final String stripPunctuation(String word) {
         if (word.equals("\'em")) {
-            this.word = word;
-            return;
+            return word;
         }
         
         if (word.endsWith("\'")) {
@@ -29,8 +32,8 @@ public class Word implements Comparable<Word> {
         if (word.startsWith("\'")) {
             word = word.substring(1);
         }
-       
-        this.word = word;
+        
+        return word;
     }
 
     public String getWord() {
@@ -49,31 +52,27 @@ public class Word implements Comparable<Word> {
         return numberOfApperances;
     }
     
-    public void updateAppearances(ArrayList<Integer> lineNumbers, ArrayList<String> fileNames) {
-        this.numberOfApperances = numberOfApperances + 1;
+    public void updateForDuplicates(Integer newLineNumber, String newFileName) {
         
-        Integer newLineNumber = lineNumbers.get(0);     
         if (!this.lineNumbers.contains(newLineNumber)) {
             this.lineNumbers.add(newLineNumber);
         }
         
-        String newFileName = fileNames.get(0);
         if (!this.fileNames.contains(newFileName)) {
             this.fileNames.add(newFileName);
         }
+        
+        this.numberOfApperances = numberOfApperances + 1;
     }
 
     @Override
     public String toString() {
-        return "Word{" + "word=" + word + ", lineNumber=" + lineNumbers + ", filename=" + fileNames + ", numberOfApperances=" + numberOfApperances + '}';
+        return "Word{" + "word=" + word + ", lineNumbers=" + lineNumbers + ", filenames=" + fileNames + ", numberOfApperances=" + numberOfApperances + '}';
     }
 
     @Override
     public int compareTo(Word other) {
         if (this.word.compareTo(other.word) == 0) {
-            // "This" is the word object that is being added but is a duplicate.
-            // "Other" is the word object that already exists, as being updated by the information in "This" word
-            other.updateAppearances(this.lineNumbers, this.fileNames);
             return 0;
         } else if (this.word.compareTo(other.word) < 0) {
             return -1;
