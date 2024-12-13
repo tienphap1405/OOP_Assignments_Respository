@@ -3,6 +3,7 @@ package implementations;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
+import utilities.Iterator;
 
 /**
  *
@@ -13,6 +14,7 @@ public class WordTracker {
     private BSTree<Word> bst = new BSTree<>();
     private String fileName;
     private File file;
+    // restructure previous tree - file path here
 
     public WordTracker(String fileName) {
         this.fileName = fileName;
@@ -28,6 +30,12 @@ public class WordTracker {
             lineNumber++;
         }
         
+        Iterator<Word> it = bst.inorderIterator();
+        while (it.hasNext()){
+            System.out.println(it.next());
+        }
+        
+        
         System.out.print("\n");   
     }
     
@@ -40,7 +48,7 @@ public class WordTracker {
         for (int i = 0; i < line.length(); i++) {
             char character = line.charAt(i);
 
-            if (Character.isLetter(character)) {
+            if (Character.isLetter(character) || character == '\'') {
                 if (!foundStartOfWord) {
                     foundStartOfWord = true;
                 }
@@ -48,15 +56,8 @@ public class WordTracker {
 
             if (!Character.isLetter(character) && character != '\''){
                 if (foundStartOfWord){
-                    // Build word
-                    Word newWord = new Word(sb.toString(), lineNumber, fileName);
                     
-                    // Tree logic happens here
-                    // Tree logic happens here
-                    // Tree logic happens here
-                    // Tree logic happens here
-                    // Tree logic happens here
-                    System.out.println(newWord);
+                    buildWord(sb.toString(), lineNumber, fileName);
                     
                     // Reset the StringBuilder to make new word
                     sb.setLength(0);
@@ -68,8 +69,27 @@ public class WordTracker {
             if (foundStartOfWord) {
                 sb.append(character);
             }
+            
+            // if there is a word at the end of a line with no punctuation afterwards
+            if (!sb.isEmpty() && character == line.charAt(line.length() - 1)) {
+                buildWord(sb.toString(), lineNumber, fileName);
+                sb.setLength(0);
+                foundStartOfWord = false;
+            }
 
         }
+    }
+    
+    public void buildWord(String contents, int lineNumber, String fileName) {
+        Word newWord = new Word(contents, lineNumber, fileName);
+                   
+        // bst.add only returns false if it failed to add due to duplication
+        boolean isDuplicated = !bst.add(newWord);
+
+        if (isDuplicated) {
+            Word previousInstance = bst.search(newWord).getElement();
+            previousInstance.updateForDuplicates(lineNumber, fileName);
+        }   
     }
     
     /**
