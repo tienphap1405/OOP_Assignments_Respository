@@ -41,7 +41,6 @@ public class WordTracker {
     
     public void processLine(String line, int lineNumber, String fileName) {
         StringBuilder sb = new StringBuilder();
-        System.out.println(line);
         
         boolean foundStartOfWord = false;
 
