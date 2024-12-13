@@ -8,6 +8,7 @@ import utilities.Iterator;
  * The implementation of an in order iterator for a binary search tree.
  * This iterator traverses the BST in in-order sequence: LVR (left, visiting, right) node
  * through the entire tree
+ * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
  * @param <E> The generic type of elements stored in the BST, the element must be comparable
  */
 public class InOrderIterator<E extends Comparable<? super E>> implements Iterator<E> {

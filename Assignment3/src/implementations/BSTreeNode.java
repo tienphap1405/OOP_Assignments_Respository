@@ -5,7 +5,7 @@ import java.io.Serializable;
 
 /**
  * The class indicates the implementation of Node structure of the Binary Search Tree 
- * @author tienp
+ * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
  * @param <E> Generic Data type of the element object
  */
 public class BSTreeNode<E extends Comparable<? super E>> implements Comparable<BSTreeNode<E>>, Serializable {

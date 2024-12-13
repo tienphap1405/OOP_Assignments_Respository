@@ -5,8 +5,20 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
+/**
+ * The AppDriver class is the Main class for the WordTracker application utilization.
+ * It handles user input, validates arguments, and invokes the WordTracker functionality
+ * for processing text files and generating reports.
+ * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
+ */
 public class AppDriver {
 
+
+    /**
+     * The main method is the entry point of the application.
+     * It validates user arguments, invokes the WordTracker class, and handles file output.
+     * @param args Command-line arguments.
+     */
     public static void main(String[] args) {
         // Constants
         final String TXTSUFFIX = ".txt";
@@ -81,7 +93,12 @@ public class AppDriver {
         System.out.println();
     
     }
-    
+    /**
+     * Runs the WordTracker with the given input file and display option.
+     * @param displayOption The display format: -pf, -pl, or -po.
+     * @param fileName The input text file to process.
+     * @param ps Optional PrintStream for exporting results to a file (null if not exporting).
+     */   
     public static void runWordTracker(String displayOption, String fileName, PrintStream ps) {
         
         try {
@@ -97,6 +114,12 @@ public class AppDriver {
         } 
     }
     
+
+    /**
+     * Validates and creates a PrintStream for the given output file.
+     * @param outputFileName The name of the output file.
+     * @return A PrintStream for the output file, or null if the file is invalid.
+     */    
     public static PrintStream validateFile(String outputFileName) {
         try {
             PrintStream ps = new PrintStream(new File("src/res/" + outputFileName));
@@ -109,10 +132,16 @@ public class AppDriver {
         return null;
     }
     
+    /**
+     * Prints the guideline on how to use the program.
+     */   
     public static final void formatMessage() {
         System.out.println("Format guide: java -jar WordTracker.jar <input.txt> -pf/-pl/-po [-f <output.txt>]");
     }
     
+    /**
+     * Print help message
+     */
     public static final void helpMessage() {
         System.out.println("Enter java -jar WordTracker.jar -h for help.");
     }

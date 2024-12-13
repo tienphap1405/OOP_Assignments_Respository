@@ -10,10 +10,14 @@ import java.io.PrintStream;
 import java.io.Serializable;
 import java.util.Scanner;
 import utilities.Iterator;
-
 /**
- *
- * @author roman
+ * The WordTracker class is the implementation for tracking words from the extracted text file,
+ * storing them in a Binary Search Tree as objects for each nodes, and tracking their appearances across
+ * files and line numbers.
+ * Serialization and Deserialization of the tree to manage the process of read and write .ser file in binary format
+ * This class also included the implementation for formatted report generation.
+ * Implements Serializable to enable saving the tree state to disk.
+ * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
  */
 public class WordTracker implements Serializable{
     private final String REPOSITORY_FILE = "repository.ser";
@@ -21,7 +25,13 @@ public class WordTracker implements Serializable{
     private String fileName;
     private File file;
     private PrintStream ps = null;
-    
+
+    /**
+     * The constructor of a WordTracker take the passed in input text file and optional output stream.
+     * While establishing the WordTracker, deserializing a previously saved tree from the .res file.
+     * @param fileName The name of the input text file.
+     * @param ps An optional PrintStream for exporting the output text file (null if not exporting).
+     */    
     public WordTracker(String fileName, PrintStream ps) {
         this.fileName = fileName;
         this.file = new File("src/res/" + fileName);
@@ -35,6 +45,13 @@ public class WordTracker implements Serializable{
         }
     }
     
+
+    /**
+     * Reads the input text file line by line, processes each line to extract words,
+     * and updates the BSTree with the number of appearances of the word.
+     * @param displayOption The format option for displaying results (-pf, -pl, -po).
+     * @throws FileNotFoundException If the input file cannot be found.
+     */
     public void readingTextFile(String displayOption) throws FileNotFoundException {
         Scanner sc = new Scanner(file);
         
@@ -49,6 +66,14 @@ public class WordTracker implements Serializable{
         System.out.print("\n");   
     }
     
+
+    /**
+     * Processes a single line of text in the text file, processing, extracting words and updating the words into the BSTree.
+     * Handles special cases for words with punctuation.
+     * @param line The line of text to process.
+     * @param lineNumber The current line number.
+     * @param fileName The name of the file being processed.
+     */   
     public void processLine(String line, int lineNumber, String fileName) {
         StringBuilder sb = new StringBuilder();
         
@@ -109,6 +134,13 @@ public class WordTracker implements Serializable{
         }
     }
     
+
+    /**
+     * Handle adding a word to the BSTree or updates its metadata if it already exists.
+     * @param contents  The word to add or update.
+     * @param lineNumber The line number where the word was found.
+     * @param fileName  The file name where the word was found.
+     */
     public void buildWord(String contents, int lineNumber, String fileName) {
         Word newWord = new Word(contents, lineNumber, fileName);
                    
@@ -121,7 +153,9 @@ public class WordTracker implements Serializable{
         }   
     }
     
-    
+    /**
+     * Serializes the BSTree to the .res file and printing out the size of the tree after the process of serializing.
+     */
     public void treeSerialization() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(REPOSITORY_FILE))) {
             oos.writeObject(bsTree);
@@ -132,7 +166,13 @@ public class WordTracker implements Serializable{
     }
 
     
-    
+    /**
+     * Deserializes the BSTree from the .res file. Constructed a new tree if the file
+     * does not exist or the process of deserialization fails.
+     * @return The deserialized BSTree or a new BSTree if deserialization fails.
+     * @throws IOException If an I/O error occurs.
+     * @throws ClassNotFoundException If the serialized class is not found.
+     */
     private BSTree<Word> treeDeserialization() throws IOException, ClassNotFoundException {
         File repoFile = new File(REPOSITORY_FILE);
 
@@ -150,7 +190,13 @@ public class WordTracker implements Serializable{
             return new BSTree<>();
         }
     }
-    
+
+
+    /**
+     * Displays the results of processing the file in the specified format.
+     * Provide Display options: -pf, -pl, and -po which return the specific formatted output.
+     * @param displayOption The format option for displaying results.
+     */   
     public void displayResults(String displayOption) {
         Iterator<Word> it = bsTree.inorderIterator();
         
@@ -177,6 +223,11 @@ public class WordTracker implements Serializable{
         } 
     }
     
+
+    /**
+     * Prints content to both the console and the output file (if specified).
+     * @param content The content to print.
+     */
     public void printToBoth(String content) {
         System.out.println(content);
         if (ps != null){

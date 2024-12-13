@@ -9,7 +9,7 @@ import utilities.Iterator;
  * The implementation of an post order iterator for a binary search tree.
  * This iterator traverses the BST in post-order sequence: LRV (left, right, visiting) node
  * through the entire tree
- * @author tienp
+ * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
  * @param <E> The generic type of elements stored in the BST, the element must be comparable
  */
 public class PostOrderIterator<E extends Comparable<? super E>> implements Iterator<E> {

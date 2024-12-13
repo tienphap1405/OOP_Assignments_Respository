@@ -8,7 +8,7 @@ import utilities.Iterator;
 /**
  * This class is the implementation of the Binary Search Tree
  *  based on the provided BSTreeADT
- * @author tienp
+ * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
  * @param <E> Generic datatype must be comparable and Serializable
  */
 public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E>, Serializable{
