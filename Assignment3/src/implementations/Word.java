@@ -10,13 +10,8 @@ public class Word implements Comparable<Word> {
     private int lineNumber;
     private String filename;
     
-    public Word(String word, int line, String filename) {
-        
-        // word parsing logic
-        //word
-        
-        
-        //word = parsedWord;
+    public Word(String word, int line, String filename) { 
+        this.word = word;
         this.lineNumber = line;
         this.filename = filename;
     }
