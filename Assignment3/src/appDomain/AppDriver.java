@@ -10,24 +10,20 @@ import java.io.FileNotFoundException;
  */
 public class AppDriver {
     public static void main(String args[]) {
-//        String XMLSUFFIX = ".xml";
-//        if (args.length != 1 || !args[0].endsWith(XMLSUFFIX)) {
+//        String TXTSUFFIX = ".txt";
+//        if (args.length != 1 || !args[0].endsWith(TXTSUFFIX)) {
 //            System.err.println("Program requires only one argument, please enter an .xml file");
 //            return; 
 //        }
-
-        // Use the provided XML file path
-        // String parserPath = args[0];
+        String displayOption = "insert here";
         
-        // Display
-        //System.out.println("================ERROR LOG===============");
         
-
         WordTracker wordTracker = new WordTracker("simpleTest.txt");
         try {
             wordTracker.readingTextFile();
         } catch (FileNotFoundException e) {
             System.err.println("File not found: " + e.getMessage());
         }
+        
     }
 }

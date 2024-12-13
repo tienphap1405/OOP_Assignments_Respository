@@ -15,7 +15,7 @@ public class WordTracker {
     private String fileName;
     private File file;
     // restructure previous tree - file path here
-
+    
     public WordTracker(String fileName) {
         this.fileName = fileName;
         file = new File("src\\res\\" + fileName); 
@@ -32,7 +32,8 @@ public class WordTracker {
         
         Iterator<Word> it = bst.inorderIterator();
         while (it.hasNext()){
-            System.out.println(it.next());
+            Word currentWord = it.next();
+            System.out.println(currentWord);
         }
         
         
