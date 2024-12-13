@@ -1,6 +1,6 @@
 # WordTracker Program
 
-The **WordTracker** program processes text files, tracks words, and provides information about their total number of appearances with line numbers. across files. It supports serialized storage, allowing persistent tracking across multiple runs.
+The **WordTracker** program processes text files, tracks words, and provides information about their total number of appearances with line numbers. across files. It supports serialized and deserialized, allowing persistent tracking across multiple runs.
 
 - Provides three display options:
   - **-pf**: Lists words and filenames.
