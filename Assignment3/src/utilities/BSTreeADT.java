@@ -17,7 +17,7 @@ import implementations.BSTreeNode;
  * 
  * @param <E> The type of elements this list holds.
  */
-public interface BSTreeADT<E extends Comparable<? super E>> extends	Serializable
+public interface BSTreeADT<E extends Comparable<? super E>> extends Serializable
 {
 	/**
 	 * The node at the root of the Binary Search Tree will be returned.

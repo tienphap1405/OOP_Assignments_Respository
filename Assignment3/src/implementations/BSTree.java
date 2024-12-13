@@ -4,6 +4,7 @@
  */
 package implementations;
 
+import java.io.Serializable;
 import utilities.BSTreeADT;
 import utilities.Iterator;
 
@@ -11,7 +12,7 @@ import utilities.Iterator;
  *
  * @author tienp
  */
-public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E>{
+public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E>, Serializable{
     private int height;
     private int size;
     private BSTreeNode<E> root;
