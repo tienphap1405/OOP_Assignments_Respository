@@ -48,7 +48,7 @@ public class AppDriver {
         if (fileName.endsWith(TXTSUFFIX)) {
             File fileToValidate = new File("src/res/"+ fileName);
             
-            if (!fileToValidate.canRead()) {
+            if (!fileToValidate.exists()) {
                 System.err.println("Please enter a .txt file that is in the res directory of the project.");
                 helpMessage();
                 return;
@@ -153,13 +153,13 @@ public class AppDriver {
      * Prints the guideline on how to use the program.
      */   
     public static final void formatMessage() {
-        System.out.println("Format guide: java -jar WordTracker.jar <input.txt> -pf/-pl/-po [-f <output.txt>]");
+        System.out.println("Format guide: java -jar ./dist/WordTracker.jar <input.txt> -pf/-pl/-po [-f <output.txt>]");
     }
     
     /**
      * Print help message
      */
     public static final void helpMessage() {
-        System.out.println("Enter java -jar WordTracker.jar -h for help.");
+        System.out.println("Enter java -jar ./dist/WordTracker.jar -h for help.");
     }
 }

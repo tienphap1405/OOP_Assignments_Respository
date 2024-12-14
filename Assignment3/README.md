@@ -10,16 +10,21 @@ The **WordTracker** program processes text files, tracks words, and provides inf
 ---
 
 ## How to Run the Program
-To run the program, use the following format:
+
+To run the program, use the following format, and it MUST be run from the project directory:
+
 ```
-java -jar WordTracker.jar <input.txt> -pf/-pl/-po [-f <output.txt>]
+java -jar ./dist/WordTracker.jar <input.txt> -pf/-pl/-po [-f <output.txt>]
 ```
 
 #### Arguments
+
 1. **`<input.txt>`** (Required):
+
    - Path to the input text file to process. Must end with `.txt`.
 
 2. **`-pf`, `-pl`, `-po`** (Required):
+
    - Specify the display option for the output:
      - **`-pf`**: Displays words and filenames.
      - **`-pl`**: Displays words, filenames, and line numbers.
@@ -29,8 +34,8 @@ java -jar WordTracker.jar <input.txt> -pf/-pl/-po [-f <output.txt>]
    - Specifies an output file to save the results. Must end with `.txt`.
 
 ---
+
 ## Notes
+
 1. Ensure the input files are placed in the `src/res/` directory.
-4. If an input or output file is invalid, the program will display an appropriate error message.
-
-
+2. If an input or output file is invalid, the program will display an appropriate error message.
