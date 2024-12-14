@@ -99,6 +99,7 @@ public class AppDriver {
                 System.err.println("Invalid Input: " + displayOption);
                 System.err.println("Please enter one of these display options: -pf/-pl/-po");
                 helpMessage();
+                return;
             }
         }
         
