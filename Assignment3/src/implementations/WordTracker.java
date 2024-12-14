@@ -20,10 +20,26 @@ import utilities.Iterator;
  * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
  */
 public class WordTracker implements Serializable{
+    /**
+     * Constant that has the file name to serialize the tree to.
+     */
     private final String REPOSITORY_FILE = "repository.ser";
+    /**
+     * The Binary Search Tree that contains all the words found
+     */
     private BSTree<Word> bsTree;
+    /**
+     * The input file name that is being read from
+     */
     private String fileName;
+    /**
+     * file that is going to be read by the program to parse the words in the text
+     */
     private File file;
+    /**
+     * An output stream that if it is not null, it will export the output of the program
+     * to the file used to create the PrintStream object.
+     */
     private PrintStream ps = null;
 
     /**

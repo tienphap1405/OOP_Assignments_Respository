@@ -9,13 +9,22 @@ import java.io.Serializable;
  * @param <E> Generic Data type of the element object
  */
 public class BSTreeNode<E extends Comparable<? super E>> implements Comparable<BSTreeNode<E>>, Serializable {
+    /**
+     * Describes the element contained in the node
+     */
     private E element;
+    /**
+     * The node containing a smaller element to the left of this node
+     */
     private BSTreeNode left;
+    /**
+     * The node containing a larger element to the right of this node
+     */
     private BSTreeNode right;
   
     /**
      * Constructor of a new Binary Search Tree Node with the value to passed in
-     * @param value the element to store inside the node
+     * @param element the element to store inside the node
      */
     public BSTreeNode(E element) {
         this.element = element;

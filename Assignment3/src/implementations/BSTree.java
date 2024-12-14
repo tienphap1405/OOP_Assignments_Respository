@@ -12,8 +12,17 @@ import utilities.Iterator;
  * @param <E> Generic datatype must be comparable and Serializable
  */
 public class BSTree<E extends Comparable<? super E>> implements BSTreeADT<E>, Serializable{
+    /**
+     * The depth or height of the tree
+     */
     private int height;
+    /**
+     * The number of nodes in the tree
+     */
     private int size;
+    /**
+     * The root or starting node of the tree.
+     */
     private BSTreeNode<E> root;
     
     /**

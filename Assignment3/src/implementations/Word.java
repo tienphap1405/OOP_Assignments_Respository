@@ -11,9 +11,18 @@ import java.util.HashMap;
  * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
  */
 public class Word implements Comparable<Word>, Serializable {
-    
+    /**
+     * The actual word that was found in the document
+     */
     private String word;
+    /**
+     * The number of instances found of this word
+     */
     private int numberOfApperances;
+    /**
+     * A HashMap containing files as keys and value-pair arrays containing 
+     * the line numbers in which the word was found
+     */
     private HashMap<String, ArrayList<Integer>> fileDictionary = new HashMap<>(); 
     
 

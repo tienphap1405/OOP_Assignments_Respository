@@ -39,3 +39,5 @@ java -jar ./dist/WordTracker.jar <input.txt> -pf/-pl/-po [-f <output.txt>]
 
 1. Ensure the input files are placed in the `src/res/` directory.
 2. If an input or output file is invalid, the program will display an appropriate error message.
+3. The serialized tree will be stored in the project directory as repository.ser
+4. javadoc will be in the /doc directory
