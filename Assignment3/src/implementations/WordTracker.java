@@ -12,7 +12,7 @@ import java.util.Scanner;
 import utilities.Iterator;
 /**
  * The WordTracker class is the implementation for tracking words from the extracted text file,
- * storing them in a Binary Search Tree as objects for each nodes, and tracking their appearances across
+ * storing them in a Binary Search Tree as objects within each node, and tracking their appearances across
  * files and line numbers.
  * Serialization and Deserialization of the tree to manage the process of read and write .ser file in binary format
  * This class also included the implementation for formatted report generation.
@@ -55,6 +55,8 @@ public class WordTracker implements Serializable{
     public void readingTextFile(String displayOption) throws FileNotFoundException {
         Scanner sc = new Scanner(file);
         
+        System.out.println("Reading and processing the file...");
+
         int lineNumber = 1;
         while (sc.hasNextLine()) {
             processLine(sc.nextLine(), lineNumber, fileName);
@@ -82,7 +84,7 @@ public class WordTracker implements Serializable{
         // Check through each character in a line
         for (int i = 0; i < line.length(); i++) {
             char character = line.charAt(i);
-
+            
             if (Character.isLetter(character) || character == '\'') {
                 if (!foundStartOfWord) {
                     foundStartOfWord = true;
@@ -94,7 +96,7 @@ public class WordTracker implements Serializable{
                     boolean specialCase = false;
                     String word = sb.toString();
                     
-                    
+                    // edge case for the shortened word for them
                     if (word.equals("\'em")) {
                         specialCase = true;
                     }
@@ -109,6 +111,7 @@ public class WordTracker implements Serializable{
                         }
                     }
                     
+                    // edge case where punctuation may precede ' and leave an empty word
                     if (!word.isBlank()) {
                         buildWord(word, lineNumber, fileName);
                     }
@@ -124,7 +127,7 @@ public class WordTracker implements Serializable{
                 sb.append(character);
             }
             
-            // if there is a word at the end of a line with no punctuation afterwards
+            // edge case where a word at the end of a line has no punctuation afterwards
             if (!sb.isEmpty() && i == line.length() - 1) {
                 buildWord(sb.toString(), lineNumber, fileName);
                 sb.setLength(0);

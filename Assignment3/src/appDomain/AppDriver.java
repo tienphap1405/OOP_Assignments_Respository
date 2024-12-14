@@ -27,7 +27,8 @@ public class AppDriver {
         final String PLARGUMENT = "-pl";
         final String POARGUMENT = "-po";
         final String OUTPUTARGUMENT = "-f";
-          
+        
+        // Optional help message
         if (args.length == 1) {
             if (args[0].equals(HELPARGUMENT)) {
                 formatMessage();
@@ -35,19 +36,31 @@ public class AppDriver {
             }
         }
         
+        // Check for the correct number of inputs 2 without export and 4 with export
         if (args.length != 2 && args.length != 4) {
             System.err.println("Invalid number of inputs!");
             helpMessage();
             return;
         }
         
+        // Check the first argument, and validate that is a readable .txt file
         String fileName = args[0];
-        if (!fileName.endsWith(TXTSUFFIX)) {
-            System.err.println("Please enter a valid .txt file.");
+        if (fileName.endsWith(TXTSUFFIX)) {
+            File fileToValidate = new File("src/res/"+ fileName);
+            
+            if (!fileToValidate.canRead()) {
+                System.err.println("Please enter a .txt file that is in the res directory of the project.");
+                helpMessage();
+                return;
+            }
+            
+        } else {
+            System.err.println("Please enter a .txt file.");
             helpMessage();
+            return;
         }
         
-        
+        // Determine if the file will be exported or not
         String outputFileName = null;
         if (args.length == 4) {
             if (args[2].equals(OUTPUTARGUMENT)) {
@@ -64,10 +77,12 @@ public class AppDriver {
                 return;
             }
         }
+        
+        // validate the exported file if it exists
         boolean exporting = false;
         PrintStream ps = null;
         if (outputFileName != null) {
-            ps = validateFile(outputFileName);
+            ps = validateOutput(outputFileName);
             exporting = true;
             if (ps == null) {
                 System.err.println("Couldn't find the file to export to.");
@@ -76,6 +91,7 @@ public class AppDriver {
             }    
         }
         
+        // Determine the display option and run the program
         String displayOption = args[1];
         switch (displayOption.toLowerCase()) {
             case PFFARGUMENT, PLARGUMENT, POARGUMENT -> runWordTracker(displayOption, fileName, ps);
@@ -85,6 +101,8 @@ public class AppDriver {
                 helpMessage();
             }
         }
+        
+        // Export confirmation message
         if (exporting == true){
             System.out.print("\n\nExporting file to: src/res/" + outputFileName);
         } else {
@@ -104,7 +122,6 @@ public class AppDriver {
         try {
             WordTracker wordTracker = new WordTracker(fileName, ps);
 
-            System.out.println("Reading and processing the file...");
             wordTracker.readingTextFile(displayOption);
             wordTracker.treeSerialization();
         } catch (FileNotFoundException e) {
@@ -120,7 +137,7 @@ public class AppDriver {
      * @param outputFileName The name of the output file.
      * @return A PrintStream for the output file, or null if the file is invalid.
      */    
-    public static PrintStream validateFile(String outputFileName) {
+    public static PrintStream validateOutput(String outputFileName) {
         try {
             PrintStream ps = new PrintStream(new File("src/res/" + outputFileName));
             return ps;

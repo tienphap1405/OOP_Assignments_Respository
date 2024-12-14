@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * The Word class represent the implementation of storing the information of word as objects 
- * along with its number of appearances accross files with line numbers.
- * Display the formatted output as -pf, -l, -po format types.
+ * The Word class represent the implementation of storing the information of words found as objects 
+ * along with its number of appearances across files with line numbers.
+ * Display the formatted output as -pf, -pl, -po format types.
  * The implementation of Comparable and Serializable for the Word object to be serialized and comparable
  * @author Tien Phap (Evan) Nguyen, Simon Luna Patiarroy
  */
@@ -34,28 +34,6 @@ public class Word implements Comparable<Word>, Serializable {
         this.numberOfApperances = 1;
         this.word = word;
     }
-    
-    /**
-     * Removes leading and trailing punctuation such as begining " and last " to form a word.
-     * Handles special cases like "'em" where the punctuation is preserved.
-     * @param word The word to process.
-     * @return The word without leading or trailing punctuation.
-     */
-    public String stripPunctuation(String word) {
-        if (word.equals("\'em")) {
-            return word;
-        }
-        
-        if (word.endsWith("\'")) {
-            word = word.substring(0,word.length() - 1);
-        }
-        
-        if (word.startsWith("\'")) {
-            word = word.substring(1);
-        }
-        
-        return word;
-    }
 
     /**
      * Retrieve and return the word being tracked
@@ -73,7 +51,7 @@ public class Word implements Comparable<Word>, Serializable {
         return numberOfApperances;
     }
     /**
-     * Retrieves the file line-to-line numbers mapping for the word using HashMap library
+     * Retrieves the file and line-by-line numbers where the word was found using HashMap library
      * @return a HashMap includes with the file names as the keys and lists of line numbers as values 
      */ 
     public HashMap<String, ArrayList<Integer>> getDictionary() {
@@ -104,7 +82,8 @@ public class Word implements Comparable<Word>, Serializable {
     }
     
     /**
-     * Display word information 
+     * Display word value 
+     * @return formatted display of the word stored
      */
     @Override
     public String toString() {
@@ -169,7 +148,7 @@ public class Word implements Comparable<Word>, Serializable {
     }
     
     /**
-     * Option -po for displaying the formatted word showing all the options, files, line numbers and the number of appearances.
+     * Option -po for displaying the formatted word showing all files, line numbers and the number of appearances.
      * @return the formatted string for the -po option when users input and running the program. 
      */
     public String displayPO() {
